@@ -20,7 +20,7 @@ return function(ctx)
 			Parent = parent,
 		})
 		image.Name = "Icon"
-		Theme.bind(image, "ImageColor3", role or "muted")
+		Theme.bind(image, "ImageColor3", role or "icon")
 		return image
 	end
 
@@ -193,7 +193,7 @@ return function(ctx)
 		Theme.bind(stroke, "Color", "border")
 
 		if opts.icon then
-			local image = Components.icon(button, opts.icon, 12, "muted")
+			local image = Components.icon(button, opts.icon, 14, "icon")
 			image.Position = UDim2.fromOffset(8, 6)
 		end
 		local label = Components.text(button, {
@@ -260,7 +260,7 @@ return function(ctx)
 				Parent = menu,
 			})
 			Util.corner(6)
-			local rowIcon = Components.icon(row, "chevron-down", 10, isCurrent and "accent" or "muted")
+			local rowIcon = Components.icon(row, "chevron-down", 12, isCurrent and "accent" or "icon")
 			rowIcon.Position = UDim2.fromOffset(8, 5)
 			local text = Components.text(row, {
 				Text = option,
@@ -322,7 +322,7 @@ return function(ctx)
 		Theme.bind(button, "BackgroundColor3", "panel2")
 		Theme.bind(stroke, "Color", "border")
 
-		local icon = Components.icon(button, spec.icon or "list-filter", 12, "muted")
+		local icon = Components.icon(button, spec.icon or "list-filter", 14, "icon")
 		icon.Position = UDim2.fromOffset(8, 6)
 		local value = Components.text(button, {
 			Text = tostring(spec.value or (spec.options and spec.options[1]) or "None"),
@@ -332,7 +332,7 @@ return function(ctx)
 			Size = UDim2.new(1, -44, 1, 0),
 			TextTruncate = Enum.TextTruncate.AtEnd,
 		})
-		local chevron = Components.icon(button, "chevron-down", 10, "muted")
+		local chevron = Components.icon(button, "chevron-down", 12, "icon")
 		chevron.AnchorPoint = Vector2.new(1, 0.5)
 		chevron.Position = UDim2.new(1, -8, 0.5, 0)
 
@@ -376,7 +376,7 @@ return function(ctx)
 		stroke.Parent = button
 		Theme.bind(button, "BackgroundColor3", "panel2")
 		Theme.bind(stroke, "Color", "border")
-		local icon = Components.icon(button, spec.icon or "layers", 12, "muted")
+		local icon = Components.icon(button, spec.icon or "layers", 14, "icon")
 		icon.Position = UDim2.fromOffset(8, 6)
 		local label = Components.text(button, {
 			Text = spec.summary or "Edit list",
@@ -386,7 +386,7 @@ return function(ctx)
 			Size = UDim2.new(1, -44, 1, 0),
 			TextTruncate = Enum.TextTruncate.AtEnd,
 		})
-		local chevron = Components.icon(button, "chevron-down", 10, "muted")
+		local chevron = Components.icon(button, "chevron-down", 12, "icon")
 		chevron.AnchorPoint = Vector2.new(1, 0.5)
 		chevron.Position = UDim2.new(1, -8, 0.5, 0)
 
@@ -444,7 +444,7 @@ return function(ctx)
 					Parent = row,
 				})
 				Util.corner(3)
-				local check = Components.icon(row, "check", 9, "bg")
+				local check = Components.icon(row, "check", 10, "bg")
 				check.Position = UDim2.fromOffset(9, 5)
 				check.ImageTransparency = selected[option] and 0 or 1
 				check.ZIndex = 252
@@ -647,7 +647,7 @@ return function(ctx)
 		local boxStroke = Util.stroke(Theme.color("border"), 1, 0.1)
 		boxStroke.Parent = box
 		Theme.bind(boxStroke, "Color", checked and "accent" or "border")
-		local check = Components.icon(box, "check", 10, "bg")
+		local check = Components.icon(box, "check", 11, "bg")
 		check.Position = UDim2.fromOffset(2, 2)
 		check.ImageTransparency = checked and 0 or 1
 		Theme.bind(check, "ImageColor3", "bg")
@@ -778,7 +778,7 @@ return function(ctx)
 			LayoutOrder = 0,
 			Parent = card,
 		})
-		local headIcon = Components.icon(head, spec.icon or "box", 14, "muted")
+		local headIcon = Components.icon(head, spec.icon or "box", 16, "icon")
 		headIcon.Position = UDim2.fromOffset(0, 1)
 
 		local title = Components.text(head, {
@@ -791,7 +791,7 @@ return function(ctx)
 		})
 
 		if spec.star ~= false then
-			local star = Components.icon(head, "star", 10, "muted")
+			local star = Components.icon(head, "star", 11, "icon")
 			star.AnchorPoint = Vector2.new(1, 0.5)
 			star.Position = UDim2.new(1, spec.toggle and -40 or -4, 0.5, 0)
 			star.ImageTransparency = 0.45

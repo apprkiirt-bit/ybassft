@@ -73,22 +73,6 @@ Notify.init(screen)
 Window.init(screen, Registry.tabs, Store)
 HUD.init(screen, Store)
 
-local function enabledEntries()
-	local list = {}
-	for _, tab in ipairs(Registry.tabs) do
-		for _, spec in ipairs(tab.cards) do
-			if spec.toggle and Store.get(spec.path .. ".enabled", false) then
-				table.insert(list, { id = spec.path, title = spec.title })
-			end
-		end
-	end
-	return list
-end
-
-local function syncArraylist()
-	HUD.registrySync(enabledEntries())
-end
-
 local function applyScale()
 	local scale = Store.get("files.interface.scale", 1)
 	local uiScale = Window.scale()
@@ -125,12 +109,9 @@ end
 applyTheme(Store.get("files.interface.theme", "Violet"), false)
 applyScale()
 applyBlur()
-syncArraylist()
 
 Store.AnyChanged:Connect(function(path)
-	if string.match(path, "%.enabled$") then
-		syncArraylist()
-	elseif path == "files.interface.scale" then
+	if path == "files.interface.scale" then
 		applyScale()
 	elseif path == "files.interface.blur" then
 		applyBlur()
@@ -180,7 +161,6 @@ Registry.actions = {
 		Store.loadDefaults(Registry.defaults())
 		Theme.apply(themeByLabel[Store.get("files.interface.theme", "Violet")] or "violet")
 		Window.build()
-		syncArraylist()
 		Notify.push({ title = "Config loaded", icon = "upload" })
 	end,
 	["files.config.delete"] = function()

@@ -55,7 +55,7 @@ return function(ctx)
 		activeTab = id
 		for tabId, button in pairs(tabButtons) do
 			local active = tabId == id
-			Util.tween(button.icon, 0.15, { ImageColor3 = active and Theme.color("accent") or Theme.color("muted") })
+			Util.tween(button.icon, 0.15, { ImageColor3 = active and Theme.color("accent") or Theme.color("icon") })
 			button.background.BackgroundTransparency = active and 0 or 1
 			button.underline.Visible = active
 		end
@@ -240,7 +240,7 @@ return function(ctx)
 				Parent = navFrame,
 			})
 			Util.corner(8)
-			local icon = Components.icon(button, tab.icon or "box", 14, "muted")
+			local icon = Components.icon(button, tab.icon or "box", 16, "icon")
 			icon.AnchorPoint = Vector2.new(0.5, 0.5)
 			icon.Position = UDim2.fromScale(0.5, 0.5)
 			local underline = Util.create("Frame", {
@@ -293,7 +293,7 @@ return function(ctx)
 				Parent = toolsFrame,
 			})
 			Util.corner(7)
-			local image = Components.icon(button, icon, 14, "muted")
+			local image = Components.icon(button, icon, 16, "icon")
 			image.AnchorPoint = Vector2.new(0.5, 0.5)
 			image.Position = UDim2.fromScale(0.5, 0.5)
 			button.Name = tooltip
@@ -304,7 +304,7 @@ return function(ctx)
 			end)
 			button.MouseLeave:Connect(function()
 				Util.tween(button, 0.12, { BackgroundTransparency = 1 })
-				image.ImageColor3 = Theme.color("muted")
+				image.ImageColor3 = Theme.color("icon")
 			end)
 			button.MouseButton1Click:Connect(function()
 				onClick(button, image)
@@ -428,7 +428,7 @@ return function(ctx)
 		})
 		Util.corner(7)
 		Util.stroke(Theme.color("border"), 1, 0.1).Parent = searchFrame
-		local icon = Components.icon(searchFrame, "search", 11, "muted")
+		local icon = Components.icon(searchFrame, "search", 13, "icon")
 		icon.Position = UDim2.fromOffset(7, 6)
 		searchBox = Util.create("TextBox", {
 			Text = "",
@@ -567,25 +567,6 @@ return function(ctx)
 		Util.corner(12)
 		local barStroke = Util.stroke(Theme.color("borderSoft"), 1, 0.2)
 		barStroke.Parent = topbar
-
-		local brand = Util.create("Frame", {
-			BackgroundTransparency = 1,
-			Size = UDim2.fromOffset(66, 16),
-			Position = UDim2.fromOffset(72, 13),
-			ZIndex = 53,
-			Parent = topbar,
-		})
-		local brandIcon = Components.icon(brand, "diamond", 14, "accent")
-		brandIcon.Position = UDim2.fromOffset(0, 1)
-		local brandLabel = Components.text(brand, {
-			Text = "ybassft",
-			TextSize = 12,
-			Font = Util.Fonts.bold,
-			Position = UDim2.fromOffset(18, 0),
-			Size = UDim2.new(1, -18, 1, 0),
-			ZIndex = 53,
-		})
-		Theme.bind(brandLabel, "TextColor3", "accent")
 
 		createTrafficLights(topbar)
 		createNav(topbar)

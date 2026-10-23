@@ -1,6 +1,7 @@
 node_modules/
 tools/*.png
-tools/*.html
+tools/reference.html
+tools/preview_static.html
 *.zip
 2809202155_Dump/
 package.json

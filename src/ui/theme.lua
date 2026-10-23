@@ -118,6 +118,10 @@ return function(ctx)
 		return Theme.palettes[current]
 	end
 
+	for _, entry in pairs(Theme.palettes) do
+		entry.icon = entry.icon or "#f6f7fb"
+	end
+
 	function Theme.get()
 		return current
 	end

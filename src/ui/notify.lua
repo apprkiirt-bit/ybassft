@@ -74,7 +74,7 @@ return function(ctx)
 			ZIndex = 402,
 			Parent = card,
 		})
-		Components.icon(head, data.icon or "bell", 12, "accent")
+		Components.icon(head, data.icon or "bell", 14, "accent")
 		local title = Components.text(head, {
 			Text = data.title or "Notification",
 			TextSize = 11,
