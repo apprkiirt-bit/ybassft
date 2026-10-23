@@ -90,7 +90,7 @@ return function(ctx)
 				Position = UDim2.new((index - 1) / columns, 0, 0, 0),
 				CanvasSize = UDim2.new(0, 0, 0, 0),
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
-				ScrollBarThickness = 2,
+				ScrollBarThickness = 0,
 				ScrollBarImageColor3 = Theme.color("border"),
 				ScrollBarImageTransparency = 0.3,
 				ScrollingDirection = Enum.ScrollingDirection.Y,
@@ -240,7 +240,7 @@ return function(ctx)
 				Parent = navFrame,
 			})
 			Util.corner(8)
-			local icon = Components.icon(button, tab.icon or "box", 16, "icon")
+			local icon = Components.icon(button, tab.icon or "box", 14, "icon")
 			icon.AnchorPoint = Vector2.new(0.5, 0.5)
 			icon.Position = UDim2.fromScale(0.5, 0.5)
 			local underline = Util.create("Frame", {
@@ -293,7 +293,7 @@ return function(ctx)
 				Parent = toolsFrame,
 			})
 			Util.corner(7)
-			local image = Components.icon(button, icon, 16, "icon")
+			local image = Components.icon(button, icon, 14, "icon")
 			image.AnchorPoint = Vector2.new(0.5, 0.5)
 			image.Position = UDim2.fromScale(0.5, 0.5)
 			button.Name = tooltip

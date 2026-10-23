@@ -42,7 +42,7 @@ return function(ctx)
 			Parent = anchorLine,
 		})
 		local layout = Util.hlist({ Padding = UDim.new(0, 5), Parent = frame })
-		local icon = Components.icon(frame, iconName, 13, "icon", 1)
+		local icon = Components.icon(frame, iconName, 12, "icon", 1)
 		local label = Util.create("TextLabel", {
 			BackgroundTransparency = 1,
 			Text = initial or "",
@@ -167,7 +167,7 @@ return function(ctx)
 			Parent = anchorLine,
 		})
 		Util.hlist({ Padding = UDim.new(0, 6), Parent = nameChip })
-		Components.icon(nameChip, "diamond", 13, "accent", 1)
+		Components.icon(nameChip, "diamond", 14, "accent", 1)
 		local nameText = Util.create("TextLabel", {
 			BackgroundTransparency = 1,
 			Text = game:GetService("Players").LocalPlayer.Name,
@@ -200,7 +200,7 @@ return function(ctx)
 			local frames = 0
 			local clock = os.clock()
 			local connection = RunService.RenderStepped:Connect(function()
-				frames += 1
+				frames = frames + 1
 			end)
 			while gui.Parent do
 				task.wait(0.5)
