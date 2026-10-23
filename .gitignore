@@ -1,0 +1,7 @@
+node_modules/
+tools/*.png
+tools/*.html
+*.zip
+2809202155_Dump/
+package.json
+package-lock.json
