@@ -1,5 +1,5 @@
 -- ybassft | YBA utility
-local RAW = "https://raw.githubusercontent.com/USER/ybassft/main/"
+local RAW = "https://raw.githubusercontent.com/apprkiirt-bit/ybassft/main/"
 
 local function join(...)
 	return table.concat({ ... }, "/")

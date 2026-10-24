@@ -3,7 +3,7 @@
 YBA (Your Bizarre Adventure) utility — Luau, modular, loaded with `loadstring`.
 
 ```lua
-loadstring(game:HttpGet("https://raw.githubusercontent.com/USER/ybassft/main/src/main.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/apprkiirt-bit/ybassft/main/src/main.lua"))()
 ```
 
 `USER` заменяется на актуальный GitHub-аккаунт после пуша.
