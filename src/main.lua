@@ -103,6 +103,48 @@ ctx.Visuals = Visuals
 ctx.Farm = Farm
 ctx.Protection = Protection
 
+local function readRage()
+	local value = Yba.player:GetAttribute("Rage") or (Yba.char() and Yba.char():GetAttribute("Rage"))
+	if type(value) == "number" then
+		return math.clamp(math.floor(value), 0, 100)
+	end
+	local gui = Yba.player:FindFirstChild("PlayerGui")
+	if gui then
+		for _, element in ipairs(gui:GetDescendants()) do
+			if element:IsA("Frame") and string.find(string.lower(element.Name), "rage", 1, true) then
+				local parent = element.Parent
+				if parent and parent:IsA("GuiObject") and parent.AbsoluteSize.X > 0 then
+					return math.clamp(math.floor(element.AbsoluteSize.X / parent.AbsoluteSize.X * 100), 0, 100)
+				end
+			end
+		end
+	end
+	return nil
+end
+
+task.spawn(function()
+	while screen.Parent do
+		task.wait(0.25)
+		local root = Yba.root()
+		if root then
+			HUD.setStatus("coords", string.format("%d, %d, %d", root.Position.X, root.Position.Y, root.Position.Z))
+		end
+		local target = ctx.Target and ctx.Target.model
+		if target and target.Parent then
+			HUD.setStatus("target", string.format("%s · %dm", target.Name, math.floor(Yba.distance(Yba.player.Character, target))))
+		else
+			HUD.setStatus("target", nil)
+		end
+		local rage = readRage()
+		HUD.setStatus("rage", rage and (rage .. "%") or nil)
+		if ctx.barrageUntil and os.clock() < ctx.barrageUntil then
+			HUD.setStatus("barrage", string.format("%.1fs", ctx.barrageUntil - os.clock()))
+		else
+			HUD.setStatus("barrage", "idle")
+		end
+	end
+end)
+
 game:GetService("UserInputService").InputBegan:Connect(function(inputObject, processed)
 	if processed then
 		return

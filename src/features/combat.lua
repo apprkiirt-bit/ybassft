@@ -90,6 +90,13 @@ return function(ctx)
 		end
 	end
 
+	local function pressKey(key)
+		YBA.key(key)
+		if key == "Q" then
+			ctx.barrageUntil = os.clock() + 3
+		end
+	end
+
 	local function standAttack()
 		local model = currentTarget()
 		if not model then
@@ -120,14 +127,14 @@ return function(ctx)
 				if enabled then
 					local key = abilityKeys[name]
 					if key then
-						YBA.key(key)
+						pressKey(key)
 						pressed = true
 						task.wait(0.05)
 					end
 				end
 			end
 			if not pressed then
-				YBA.key("Q")
+				pressKey("Q")
 			end
 		end
 	end
@@ -149,7 +156,7 @@ return function(ctx)
 			YBA.click()
 		end
 		if mode == "Abilities" or mode == "Mixed" then
-			YBA.key("Q")
+			pressKey("Q")
 		end
 	end
 

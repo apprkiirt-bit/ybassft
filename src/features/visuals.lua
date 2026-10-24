@@ -316,6 +316,52 @@ return function(ctx)
 		YBA.player.CameraMaxZoomDistance = on("visuals.camera.zoom", 128)
 	end
 
+	local freecamState = nil
+
+	local function freecamStep()
+		local camera = workspace.CurrentCamera
+		local humanoid = YBA.humanoid()
+		if not camera or not humanoid then
+			return
+		end
+		if on("visuals.camera.freecam", false) then
+			if not freecamState then
+				freecamState = { cframe = camera.CFrame, subject = camera.CameraSubject }
+				camera.CameraType = Enum.CameraType.Scriptable
+			end
+			local speed = 40
+			local move = Vector3.new()
+			for _, key in ipairs(game:GetService("UserInputService"):GetKeysPressed()) do
+				if key.KeyCode == Enum.KeyCode.W then
+					move = move + camera.CFrame.LookVector
+				elseif key.KeyCode == Enum.KeyCode.S then
+					move = move - camera.CFrame.LookVector
+				elseif key.KeyCode == Enum.KeyCode.A then
+					move = move - camera.CFrame.RightVector
+				elseif key.KeyCode == Enum.KeyCode.D then
+					move = move + camera.CFrame.RightVector
+				elseif key.KeyCode == Enum.KeyCode.Space then
+					move = move + Vector3.new(0, 1, 0)
+				elseif key.KeyCode == Enum.KeyCode.LeftControl then
+					move = move - Vector3.new(0, 1, 0)
+				end
+			end
+			if move.Magnitude > 0 then
+				move = move.Unit
+			end
+			local delta = game:GetService("UserInputService"):GetMouseDelta()
+			local yaw = math.rad(-delta.X * 0.15)
+			local pitch = math.rad(-delta.Y * 0.15)
+			local current = camera.CFrame
+			local rotated = current * CFrame.Angles(0, yaw, 0) * CFrame.Angles(pitch, 0, 0)
+			camera.CFrame = CFrame.new(current.Position + move * speed * 0.016) * rotated.Rotation
+		elseif freecamState then
+			camera.CameraType = Enum.CameraType.Custom
+			camera.CameraSubject = freecamState.subject or humanoid
+			freecamState = nil
+		end
+	end
+
 	function Visuals.init(store)
 		Store = store
 		installRemovalHooks()
@@ -328,6 +374,7 @@ return function(ctx)
 		RunService.Heartbeat:Connect(function()
 			applyLowGfx()
 			applyCamera()
+			freecamStep()
 		end)
 		UserInputService.InputBegan:Connect(function(input, processed)
 			if processed then

@@ -2,13 +2,13 @@
   "0": "window.lua",
   "1": "Theme.color",
   "2": "util.lua",
-  "3": "main.lua",
+  "3": "yba.lua",
   "4": "gen-data.js",
-  "5": "store.lua",
-  "6": "hud.lua",
+  "5": "main.lua",
+  "6": "movement.lua",
   "7": "signal.lua",
-  "8": "config.lua",
-  "9": "icons.lua",
+  "8": "farm.lua",
+  "9": "visuals.lua",
   "10": "ybassft",
   "11": "data.js"
 }
