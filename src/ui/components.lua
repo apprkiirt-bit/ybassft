@@ -778,7 +778,7 @@ return function(ctx)
 			LayoutOrder = 0,
 			Parent = card,
 		})
-		local headIcon = Components.icon(head, spec.icon or "box", 18, "icon")
+		local headIcon = Components.icon(head, "volume-2", 18, "icon")
 		headIcon.Position = UDim2.fromOffset(0, 1)
 
 		local title = Components.text(head, {

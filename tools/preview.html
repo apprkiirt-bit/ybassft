@@ -223,7 +223,7 @@ function buildCard(card) {
   const box = el("div", "card");
   const st = values[card.path];
   const head = el("div", "head");
-  head.appendChild(img(card.icon || "box", "ico"));
+  head.appendChild(img("volume-2", "ico"));
   const title = el("div", "title"); title.textContent = card.title; head.appendChild(title);
   head.appendChild(img("star", "star"));
   if (card.pill) { const p = el("div", "pill"); p.textContent = card.pill; head.appendChild(p); }
