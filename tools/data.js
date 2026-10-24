@@ -10,7 +10,7 @@ window.YBASSFT_TABS = [
     "icon": "orbit",
     "pill": "Pilot",
     "toggle": true,
-    "desc": "Управление стендом как пилотом, на любом стенде",
+    "desc": "Ведёшь стенд как пилотом — работает на любом стенде, даже без пилота",
     "fields": [
      {
       "type": "select",
@@ -19,8 +19,7 @@ window.YBASSFT_TABS = [
       "options": [
        "Free",
        "Orbit",
-       "Locked",
-       "Follow"
+       "Locked"
       ],
       "value": "Free"
      },
@@ -36,7 +35,7 @@ window.YBASSFT_TABS = [
      {
       "type": "slider",
       "id": "speed",
-      "label": "Speed",
+      "label": "Follow speed",
       "min": 5,
       "max": 120,
       "value": 34
@@ -45,11 +44,12 @@ window.YBASSFT_TABS = [
       "type": "checkbox",
       "id": "resummon",
       "label": "Auto re-summon",
+      "hint": "Подзывает стенд, если он пропал",
       "value": true
      },
      {
       "type": "keybind",
-      "id": "key",
+      "id": "toggle_key",
       "label": "Toggle key"
      }
     ],
@@ -61,7 +61,7 @@ window.YBASSFT_TABS = [
     "icon": "target",
     "pill": "Auto",
     "toggle": true,
-    "desc": "Стенд тп-шится к цели и бьёт за тебя",
+    "desc": "Стенд тп-шится к цели и бьёт — LMB или заданные абилки",
     "fields": [
      {
       "type": "select",
@@ -70,8 +70,8 @@ window.YBASSFT_TABS = [
       "options": [
        "Selected",
        "Nearest",
-       "Crosshair",
-       "Lowest HP"
+       "Lowest HP",
+       "Highest HP"
       ],
       "value": "Selected"
      },
@@ -92,12 +92,9 @@ window.YBASSFT_TABS = [
       "label": "Abilities",
       "options": [
        "Barrage",
-       "Finisher",
-       "Projectile",
        "Heavy",
-       "Grab",
-       "Heal",
-       "Counter"
+       "Special",
+       "Ultimate"
       ]
      },
      {
@@ -127,11 +124,44 @@ window.YBASSFT_TABS = [
      },
      {
       "type": "keybind",
-      "id": "key",
+      "id": "toggle_key",
       "label": "Toggle key"
      }
     ],
     "path": "combat.stand_attack"
+   },
+   {
+    "id": "target",
+    "title": "Target Select",
+    "icon": "crosshair",
+    "pill": "Focus",
+    "toggle": true,
+    "desc": "Тыкнул в игрока в ESP — он в фокусе для всех модулей",
+    "fields": [
+     {
+      "type": "select",
+      "id": "mode",
+      "label": "Pick mode",
+      "options": [
+       "ESP click",
+       "Crosshair",
+       "Nearest"
+      ],
+      "value": "ESP click"
+     },
+     {
+      "type": "checkbox",
+      "id": "esp_click",
+      "label": "Click on ESP box",
+      "value": true
+     },
+     {
+      "type": "keybind",
+      "id": "lock_key",
+      "label": "Lock key"
+     }
+    ],
+    "path": "combat.target"
    },
    {
     "id": "movestack",
@@ -139,40 +169,37 @@ window.YBASSFT_TABS = [
     "icon": "layers",
     "pill": "2x",
     "toggle": true,
-    "desc": "Две абилки одновременно, как старый баг с боксом",
+    "desc": "Две абилки одновременно — барраж + хил, бокс + стенд",
     "fields": [
      {
       "type": "select",
-      "id": "first",
+      "id": "ability_a",
       "label": "Ability 1",
       "options": [
        "Barrage",
        "Heavy",
-       "Projectile",
-       "Grab",
-       "Counter",
-       "Heal",
+       "Special",
+       "Ultimate",
        "M1"
       ],
       "value": "Barrage"
      },
      {
       "type": "select",
-      "id": "second",
+      "id": "ability_b",
       "label": "Ability 2",
       "options": [
-       "Boxing barrage",
-       "Hamon",
-       "Spin",
-       "Sword",
-       "Vampire",
+       "Barrage",
+       "Heavy",
+       "Special",
+       "Ultimate",
        "M1"
       ],
-      "value": "Boxing barrage"
+      "value": "Heavy"
      },
      {
       "type": "slider",
-      "id": "delay",
+      "id": "stack_delay",
       "label": "Stack delay",
       "min": 0,
       "max": 0.5,
@@ -182,30 +209,85 @@ window.YBASSFT_TABS = [
      },
      {
       "type": "checkbox",
-      "id": "repeat",
-      "label": "Hold to repeat"
+      "id": "hold",
+      "label": "Hold to repeat",
+      "value": true
      },
      {
       "type": "keybind",
-      "id": "key",
+      "id": "stack_key",
       "label": "Stack key"
      }
     ],
     "path": "combat.movestack"
    },
    {
-    "id": "attack_aura",
+    "id": "rotation",
+    "title": "Ability Rotation",
+    "icon": "repeat",
+    "pill": "Combo",
+    "toggle": true,
+    "desc": "Сценарий комбо с шагами и задержками, пресеты под стенд",
+    "fields": [
+     {
+      "type": "select",
+      "id": "preset",
+      "label": "Preset",
+      "options": [
+       "Barrage combo",
+       "Heavy combo",
+       "Custom"
+      ],
+      "value": "Barrage combo"
+     },
+     {
+      "type": "multi",
+      "id": "steps",
+      "label": "Steps",
+      "options": [
+       "Barrage",
+       "Heavy",
+       "Special",
+       "Ultimate"
+      ]
+     },
+     {
+      "type": "slider",
+      "id": "step_delay",
+      "label": "Step delay",
+      "min": 0.05,
+      "max": 1,
+      "value": 0.25,
+      "decimals": 2,
+      "suffix": "s"
+     },
+     {
+      "type": "checkbox",
+      "id": "repeat",
+      "label": "Loop combo"
+     },
+     {
+      "type": "keybind",
+      "id": "rotation_key",
+      "label": "Start key"
+     }
+    ],
+    "path": "combat.rotation"
+   },
+   {
+    "id": "aura",
     "title": "Attack Aura",
     "icon": "zap",
     "pill": "Aura",
     "toggle": true,
+    "desc": "M1 в радиусе по NPC и игрокам, как в референсе",
     "fields": [
      {
       "type": "slider",
       "id": "range",
       "label": "Range",
-      "min": 3,
-      "max": 30,
+      "min": 4,
+      "max": 40,
       "value": 12,
       "suffix": " st"
      },
@@ -221,215 +303,96 @@ window.YBASSFT_TABS = [
       "value": "M1 only"
      },
      {
+      "type": "select",
+      "id": "targets",
+      "label": "Targets",
+      "options": [
+       "Both",
+       "Players only",
+       "NPC only"
+      ],
+      "value": "Both"
+     },
+     {
       "type": "slider",
       "id": "delay",
-      "label": "Delay",
-      "min": 0.05,
+      "label": "Hit delay",
+      "min": 0.04,
       "max": 1,
-      "value": 0.2,
+      "value": 0.12,
       "decimals": 2,
       "suffix": "s"
-     },
-     {
-      "type": "checkbox",
-      "id": "players",
-      "label": "Include players",
-      "value": false
-     },
-     {
-      "type": "multi",
-      "id": "ignore",
-      "label": "Ignore list",
-      "options": [
-       "Friends",
-       "Party",
-       "Low HP",
-       "NPC",
-       "Dummies"
-      ]
-     }
-    ],
-    "path": "combat.attack_aura"
-   },
-   {
-    "id": "auto_block",
-    "title": "Auto Block",
-    "icon": "shield",
-    "pill": "Guard",
-    "toggle": true,
-    "desc": "Держит блок под атакой, умеет ловить perfect block",
-    "fields": [
-     {
-      "type": "select",
-      "id": "mode",
-      "label": "Mode",
-      "options": [
-       "Hold",
-       "Proximity",
-       "On attack",
-       "Smart"
-      ],
-      "value": "Proximity"
-     },
-     {
-      "type": "slider",
-      "id": "range",
-      "label": "Trigger range",
-      "min": 2,
-      "max": 30,
-      "value": 10,
-      "suffix": " st"
-     },
-     {
-      "type": "checkbox",
-      "id": "parry",
-      "label": "Perfect block window",
-      "value": true
-     },
-     {
-      "type": "slider",
-      "id": "window",
-      "label": "Parry window",
-      "min": 0.05,
-      "max": 0.4,
-      "value": 0.14,
-      "decimals": 2,
-      "suffix": "s"
-     },
-     {
-      "type": "checkbox",
-      "id": "barraged",
-      "label": "Block while barraged",
-      "value": true
      },
      {
       "type": "keybind",
-      "id": "key",
+      "id": "aura_key",
       "label": "Toggle key"
      }
     ],
-    "path": "combat.auto_block"
+    "path": "combat.aura"
    },
    {
     "id": "fast_m1",
     "title": "Fast M1",
-    "icon": "mouse-pointer-click",
+    "icon": "swords",
     "pill": "Fast",
     "toggle": true,
+    "desc": "Убирает задержку и анимацию между ударами",
     "fields": [
      {
       "type": "slider",
-      "id": "delay",
+      "id": "click_delay",
       "label": "Click delay",
       "min": 0.02,
-      "max": 0.3,
+      "max": 0.5,
       "value": 0.06,
       "decimals": 2,
       "suffix": "s"
      },
      {
       "type": "checkbox",
-      "id": "anim",
+      "id": "skip_anim",
       "label": "Skip swing animation",
       "value": true
      },
      {
       "type": "keybind",
-      "id": "key",
+      "id": "m1_key",
       "label": "Toggle key"
      }
     ],
     "path": "combat.fast_m1"
    },
    {
-    "id": "target_lock",
-    "title": "Target Lock",
-    "icon": "crosshair",
-    "pill": "Lock",
+    "id": "hitbox",
+    "title": "Hitbox Extend",
+    "icon": "scan",
+    "pill": "Exp",
     "toggle": true,
+    "desc": "Экспериментально: сервер может резать попадания",
     "fields": [
+     {
+      "type": "slider",
+      "id": "range",
+      "label": "Hitbox size",
+      "min": 6,
+      "max": 40,
+      "value": 20,
+      "suffix": " st"
+     },
      {
       "type": "select",
       "id": "mode",
       "label": "Mode",
       "options": [
-       "Camera",
-       "Character",
-       "Stand"
+       "Expand",
+       "Extend",
+       "Ghost"
       ],
-      "value": "Camera"
-     },
-     {
-      "type": "slider",
-      "id": "smooth",
-      "label": "Smoothing",
-      "min": 0,
-      "max": 1,
-      "value": 0.35,
-      "decimals": 2
-     },
-     {
-      "type": "checkbox",
-      "id": "follow",
-      "label": "Follow through walls",
-      "value": false
-     },
-     {
-      "type": "keybind",
-      "id": "key",
-      "label": "Lock key"
+      "value": "Expand"
      }
     ],
-    "path": "combat.target_lock"
-   },
-   {
-    "id": "ability_use",
-    "title": "Ability Auto-Use",
-    "icon": "activity",
-    "pill": "Cycle",
-    "toggle": true,
-    "fields": [
-     {
-      "type": "multi",
-      "id": "abilities",
-      "label": "Rotation",
-      "options": [
-       "Barrage",
-       "Heavy",
-       "Projectile",
-       "Grab",
-       "Counter",
-       "Heal",
-       "Awakening"
-      ]
-     },
-     {
-      "type": "slider",
-      "id": "delay",
-      "label": "Step delay",
-      "min": 0.1,
-      "max": 2,
-      "value": 0.5,
-      "decimals": 2,
-      "suffix": "s"
-     },
-     {
-      "type": "slider",
-      "id": "hp",
-      "label": "Heal under",
-      "min": 10,
-      "max": 100,
-      "value": 55,
-      "suffix": "%"
-     },
-     {
-      "type": "checkbox",
-      "id": "onattack",
-      "label": "Only while in combat",
-      "value": true
-     }
-    ],
-    "path": "combat.ability_use"
+    "path": "combat.hitbox"
    }
   ]
  },
@@ -440,27 +403,33 @@ window.YBASSFT_TABS = [
   "cards": [
    {
     "id": "speed",
-    "title": "Speed",
-    "icon": "wind",
-    "pill": "Move",
+    "title": "Walk Speed",
+    "icon": "gauge",
+    "pill": "Speed",
     "toggle": true,
+    "desc": "Скорость бега или высота шага",
     "fields": [
      {
-      "type": "slider",
-      "id": "value",
-      "label": "WalkSpeed",
-      "min": 16,
-      "max": 300,
-      "value": 34
+      "type": "select",
+      "id": "mode",
+      "label": "Mode",
+      "options": [
+       "WalkSpeed",
+       "HipHeight"
+      ],
+      "value": "WalkSpeed"
      },
      {
-      "type": "checkbox",
-      "id": "jump",
-      "label": "Scale jump too"
+      "type": "slider",
+      "id": "speed",
+      "label": "Value",
+      "min": 16,
+      "max": 200,
+      "value": 60
      },
      {
       "type": "keybind",
-      "id": "key",
+      "id": "toggle_key",
       "label": "Toggle key"
      }
     ],
@@ -468,24 +437,30 @@ window.YBASSFT_TABS = [
    },
    {
     "id": "jump",
-    "title": "Jump",
-    "icon": "arrow-up-right",
+    "title": "Jump Power",
+    "icon": "arrow-up",
     "pill": "Jump",
     "toggle": true,
+    "desc": "Сила прыжка и бесконечный прыжок",
     "fields": [
      {
       "type": "slider",
       "id": "power",
-      "label": "JumpPower",
+      "label": "Power",
       "min": 50,
-      "max": 250,
-      "value": 70
+      "max": 300,
+      "value": 90
      },
      {
       "type": "checkbox",
       "id": "infinite",
       "label": "Infinite jump",
       "value": true
+     },
+     {
+      "type": "keybind",
+      "id": "toggle_key",
+      "label": "Toggle key"
      }
     ],
     "path": "movement.jump"
@@ -493,38 +468,40 @@ window.YBASSFT_TABS = [
    {
     "id": "fly",
     "title": "Fly",
-    "icon": "orbit",
+    "icon": "plane",
     "pill": "Fly",
     "toggle": true,
+    "desc": "Плавный полёт, пробел вверх, ctrl вниз",
     "fields": [
      {
       "type": "slider",
       "id": "speed",
       "label": "Speed",
+      "min": 20,
+      "max": 250,
+      "value": 70
+     },
+     {
+      "type": "slider",
+      "id": "vertical",
+      "label": "Vertical speed",
       "min": 10,
-      "max": 300,
-      "value": 80
+      "max": 200,
+      "value": 50
      },
      {
       "type": "select",
       "id": "mode",
       "label": "Mode",
       "options": [
-       "CFrame",
-       "Velocity",
-       "Hybrid"
+       "Camera",
+       "Straight"
       ],
-      "value": "CFrame"
-     },
-     {
-      "type": "checkbox",
-      "id": "vertical",
-      "label": "Space / Ctrl vertical",
-      "value": true
+      "value": "Camera"
      },
      {
       "type": "keybind",
-      "id": "key",
+      "id": "toggle_key",
       "label": "Toggle key"
      }
     ],
@@ -536,17 +513,12 @@ window.YBASSFT_TABS = [
     "icon": "ghost",
     "pill": "Clip",
     "toggle": true,
+    "desc": "Проход сквозь стены",
     "fields": [
      {
-      "type": "checkbox",
-      "id": "auto",
-      "label": "Always on",
-      "value": true
-     },
-     {
       "type": "keybind",
-      "id": "key",
-      "label": "Hold key"
+      "id": "toggle_key",
+      "label": "Toggle key"
      }
     ],
     "path": "movement.noclip"
@@ -554,388 +526,257 @@ window.YBASSFT_TABS = [
    {
     "id": "teleport",
     "title": "Teleport",
-    "icon": "map-pin",
+    "icon": "move",
     "pill": "TP",
-    "toggle": false,
+    "desc": "Телепорт к курсору, игроку или точке",
     "fields": [
      {
       "type": "button",
       "id": "to_cursor",
-      "text": "Teleport to cursor",
-      "icon": "mouse-pointer-click"
+      "text": "To cursor",
+      "icon": "mouse-pointer",
+      "action": "movement.to_cursor"
      },
      {
-      "type": "multi",
+      "type": "button",
+      "id": "to_target",
+      "text": "To target",
+      "icon": "crosshair",
+      "action": "movement.to_target"
+     },
+     {
+      "type": "select",
       "id": "player",
       "label": "Player",
       "options": [
-       "Nearest",
-       "Random",
-       "Selected"
-      ]
+       "Nearest"
+      ],
+      "value": "Nearest"
      },
      {
       "type": "button",
       "id": "to_player",
-      "text": "Teleport to player",
-      "icon": "user",
-      "role": "accent"
-     },
-     {
-      "type": "divider"
-     },
-     {
-      "type": "button",
-      "id": "save_point",
-      "text": "Save waypoint",
-      "icon": "save"
-     },
-     {
-      "type": "multi",
-      "id": "points",
-      "label": "Waypoints",
-      "options": [
-       "Spawn",
-       "Merchant",
-       "Arcade",
-       "Shop",
-       "Boss"
-      ]
-     },
-     {
-      "type": "button",
-      "id": "to_point",
-      "text": "Teleport to waypoint",
-      "icon": "arrow-right"
+      "text": "To player",
+      "icon": "user-round",
+      "action": "movement.to_player"
      }
     ],
     "path": "movement.teleport"
    },
    {
-    "id": "hip",
-    "title": "Hip Height",
-    "icon": "move",
-    "pill": "Body",
+    "id": "waypoints",
+    "title": "Waypoints",
+    "icon": "map-pin",
+    "pill": "Points",
+    "desc": "Сохранить точку, прыгнуть, удалить",
+    "fields": [
+     {
+      "type": "select",
+      "id": "slot",
+      "label": "Slot",
+      "options": [
+       "W1",
+       "W2",
+       "W3",
+       "W4",
+       "W5"
+      ],
+      "value": "W1"
+     },
+     {
+      "type": "button",
+      "id": "save",
+      "text": "Save here",
+      "icon": "save",
+      "action": "movement.waypoint_save"
+     },
+     {
+      "type": "button",
+      "id": "go",
+      "text": "Teleport",
+      "icon": "arrow-right",
+      "action": "movement.waypoint_go"
+     },
+     {
+      "type": "button",
+      "id": "delete",
+      "text": "Delete",
+      "icon": "trash-2",
+      "action": "movement.waypoint_delete"
+     }
+    ],
+    "path": "movement.waypoints"
+   },
+   {
+    "id": "dash",
+    "title": "Auto Dash",
+    "icon": "wind",
+    "pill": "Dash",
     "toggle": true,
+    "desc": "Рывок в сторону движения с кулдауном",
     "fields": [
      {
       "type": "slider",
-      "id": "value",
-      "label": "HipHeight",
-      "min": -2,
-      "max": 12,
-      "value": 2,
-      "decimals": 1
+      "id": "power",
+      "label": "Power",
+      "min": 20,
+      "max": 200,
+      "value": 90
+     },
+     {
+      "type": "slider",
+      "id": "cooldown",
+      "label": "Cooldown",
+      "min": 0.1,
+      "max": 3,
+      "value": 0.6,
+      "decimals": 2,
+      "suffix": "s"
+     },
+     {
+      "type": "keybind",
+      "id": "toggle_key",
+      "label": "Toggle key"
      }
     ],
-    "path": "movement.hip"
+    "path": "movement.dash"
    }
   ]
  },
  {
   "id": "farm",
-  "icon": "grid-2x2",
+  "icon": "coins",
   "title": "Farm",
   "cards": [
    {
-    "id": "auto_farm",
+    "id": "autofarm",
     "title": "Auto Farm",
-    "icon": "target",
-    "pill": "Core",
+    "icon": "swords",
+    "pill": "Farm",
     "toggle": true,
-    "desc": "Фарм NPC: цель, скорость, порядок абилок, дистанция",
+    "desc": "NPC и мобы: выбор цели, радиус, приоритет, тайминги",
     "fields": [
      {
       "type": "select",
-      "id": "target",
-      "label": "Target",
+      "id": "attack",
+      "label": "Attack",
+      "options": [
+       "M1",
+       "Abilities",
+       "Mixed"
+      ],
+      "value": "Mixed"
+     },
+     {
+      "type": "select",
+      "id": "priority",
+      "label": "Priority",
       "options": [
        "Nearest",
-       "Selected",
-       "Boss only",
-       "Quest NPC",
-       "Dummies",
-       "Custom"
+       "Lowest HP",
+       "Highest HP"
       ],
       "value": "Nearest"
      },
      {
       "type": "slider",
       "id": "radius",
-      "label": "Search radius",
-      "min": 10,
-      "max": 300,
-      "value": 90,
+      "label": "Radius",
+      "min": 50,
+      "max": 2000,
+      "value": 900,
       "suffix": " st"
-     },
-     {
-      "type": "select",
-      "id": "attack",
-      "label": "Attack mode",
-      "options": [
-       "M1",
-       "Abilities",
-       "Mixed",
-       "Safest"
-      ],
-      "value": "Mixed"
-     },
-     {
-      "type": "multi",
-      "id": "abilities",
-      "label": "Abilities",
-      "options": [
-       "Barrage",
-       "Heavy",
-       "Projectile",
-       "Grab",
-       "Counter",
-       "Awakening"
-      ]
      },
      {
       "type": "slider",
       "id": "delay",
-      "label": "Attack delay",
+      "label": "Attack speed",
       "min": 0.05,
       "max": 1,
-      "value": 0.18,
+      "value": 0.2,
       "decimals": 2,
       "suffix": "s"
      },
      {
-      "type": "slider",
-      "id": "keep",
-      "label": "Keep distance",
-      "min": 2,
-      "max": 25,
-      "value": 6,
-      "suffix": " st"
-     },
-     {
       "type": "checkbox",
       "id": "tp",
-      "label": "Teleport to target",
+      "label": "TP to target",
       "value": true
      },
      {
-      "type": "checkbox",
-      "id": "heal",
-      "label": "Auto heal",
-      "value": true
-     },
-     {
-      "type": "slider",
-      "id": "heal_hp",
-      "label": "Heal under",
-      "min": 10,
-      "max": 80,
-      "value": 45,
-      "suffix": "%"
-     },
-     {
-      "type": "slider",
-      "id": "pause",
-      "label": "Cycle pause",
-      "min": 0,
-      "max": 5,
-      "value": 0.4,
-      "decimals": 1,
-      "suffix": "s"
-     },
-     {
-      "type": "checkbox",
-      "id": "stuck",
-      "label": "Anti-stuck",
-      "value": true
+      "type": "multi",
+      "id": "abilities",
+      "label": "Ability order",
+      "options": [
+       "Barrage",
+       "Heavy",
+       "Special",
+       "Ultimate"
+      ]
      },
      {
       "type": "keybind",
-      "id": "key",
+      "id": "farm_key",
       "label": "Toggle key"
      }
     ],
-    "path": "farm.auto_farm"
+    "path": "farm.autofarm"
    },
    {
-    "id": "farm_route",
-    "title": "Farm Route",
-    "icon": "map-pin",
-    "pill": "Route",
-    "toggle": false,
-    "fields": [
-     {
-      "type": "select",
-      "id": "zone",
-      "label": "Zone",
-      "options": [
-       "Auto",
-       "Naples",
-       "Morioh",
-       "Cafe",
-       "Arcade",
-       "Sewers"
-      ],
-      "value": "Auto"
-     },
-     {
-      "type": "checkbox",
-      "id": "return",
-      "label": "Return to spot",
-      "value": true
-     },
-     {
-      "type": "slider",
-      "id": "reset",
-      "label": "Reset after",
-      "min": 10,
-      "max": 300,
-      "value": 60,
-      "decimals": 0,
-      "suffix": "s"
-     },
-     {
-      "type": "button",
-      "id": "pin",
-      "text": "Pin current position",
-      "icon": "map-pin"
-     }
-    ],
-    "path": "farm.farm_route"
-   },
-   {
-    "id": "auto_sell",
+    "id": "sell",
     "title": "Auto Sell",
     "icon": "banknote",
-    "pill": "Money",
+    "pill": "Sell",
     "toggle": true,
-    "desc": "Продаёт лут, помогает фарму а не мешает ему",
+    "desc": "Продажа мерчанту между циклами, с фильтром редкости",
     "fields": [
      {
-      "type": "select",
-      "id": "mode",
-      "label": "Mode",
-      "options": [
-       "Everything",
-       "By rarity",
-       "Blacklist"
-      ],
-      "value": "By rarity"
-     },
-     {
-      "type": "select",
+      "type": "multi",
       "id": "rarity",
-      "label": "Sell at or below",
+      "label": "Rarity filter",
       "options": [
        "Common",
        "Uncommon",
        "Rare",
+       "Epic",
        "Legendary",
        "Mythic"
-      ],
-      "value": "Uncommon"
-     },
-     {
-      "type": "multi",
-      "id": "keep",
-      "label": "Never sell",
-      "options": [
-       "Roka",
-       "Pure Roka",
-       "Corpse Part",
-       "Diary",
-       "Lucky Arrow",
-       "Rib Cage"
       ]
      },
      {
-      "type": "slider",
-      "id": "reserve",
-      "label": "Money reserve",
-      "min": 0,
-      "max": 30000,
-      "value": 5000
+      "type": "checkbox",
+      "id": "skip_dialogue",
+      "label": "Skip dialogue",
+      "hint": "Ускоряет продажу и сбор Roka",
+      "value": true
      },
      {
       "type": "slider",
       "id": "interval",
       "label": "Interval",
-      "min": 1,
-      "max": 60,
-      "value": 6,
+      "min": 5,
+      "max": 120,
+      "value": 20,
       "suffix": "s"
      },
      {
-      "type": "checkbox",
-      "id": "sync",
-      "label": "Sell between farm cycles",
-      "value": true
-     },
-     {
-      "type": "checkbox",
-      "id": "skip",
-      "label": "Skip merchant dialogue",
-      "value": true
-     },
-     {
-      "type": "checkbox",
-      "id": "notify",
-      "label": "Notify on sell",
-      "value": true
-     }
-    ],
-    "path": "farm.auto_sell"
-   },
-   {
-    "id": "auto_collect",
-    "title": "Auto Collect",
-    "icon": "package",
-    "pill": "Loot",
-    "toggle": true,
-    "fields": [
-     {
-      "type": "multi",
-      "id": "priority",
-      "label": "Priority",
-      "options": [
-       "Roka",
-       "Pure Roka",
-       "Corpse Part",
-       "Diary",
-       "Lucky Arrow",
-       "Any"
-      ]
-     },
-     {
       "type": "slider",
-      "id": "distance",
-      "label": "Max distance",
-      "min": 50,
-      "max": 600,
-      "value": 250,
-      "suffix": " st"
-     },
-     {
-      "type": "checkbox",
-      "id": "tp",
-      "label": "Teleport on pickup",
-      "value": true
-     },
-     {
-      "type": "checkbox",
-      "id": "sound",
-      "label": "Sound on rare",
-      "value": true
+      "id": "threshold",
+      "label": "Money threshold",
+      "min": 0,
+      "max": 100000,
+      "value": 0
      }
     ],
-    "path": "farm.auto_collect"
+    "path": "farm.sell"
    },
    {
-    "id": "auto_buy",
+    "id": "buy",
     "title": "Auto Buy",
     "icon": "shopping-cart",
-    "pill": "Shop",
-    "toggle": false,
+    "pill": "Buy",
+    "toggle": true,
+    "desc": "Lucky Arrow, Roka, Corpse Parts и прочее",
     "fields": [
      {
       "type": "multi",
@@ -944,123 +785,144 @@ window.YBASSFT_TABS = [
       "options": [
        "Lucky Arrow",
        "Roka",
-       "Arrow",
-       "Rib Cage",
-       "Stone Mask",
-       "Corpse Part"
+       "Corpse Parts",
+       "Diary",
+       "Rib Cage"
       ]
      },
      {
       "type": "slider",
-      "id": "price",
-      "label": "Max price",
-      "min": 100,
-      "max": 30000,
-      "value": 2500
-     },
-     {
-      "type": "slider",
-      "id": "reserve",
-      "label": "Keep money",
-      "min": 0,
-      "max": 30000,
-      "value": 1000
-     },
-     {
-      "type": "slider",
       "id": "interval",
-      "label": "Restock check",
-      "min": 1,
+      "label": "Delay",
+      "min": 2,
       "max": 60,
       "value": 10,
       "suffix": "s"
      },
      {
-      "type": "checkbox",
-      "id": "confirm",
-      "label": "Confirm purchase",
-      "value": true
+      "type": "slider",
+      "id": "price_limit",
+      "label": "Price limit",
+      "min": 0,
+      "max": 100000,
+      "value": 5000
      }
     ],
-    "path": "farm.auto_buy"
+    "path": "farm.buy"
    },
    {
-    "id": "auto_roll",
+    "id": "roll",
     "title": "Auto Roll",
-    "icon": "refresh-cw",
-    "pill": "Stands",
-    "toggle": false,
+    "icon": "dice",
+    "pill": "Roll",
+    "toggle": true,
+    "desc": "Стрела → проверка стенда → Roka → повтор, стоп на редком",
     "fields": [
      {
       "type": "multi",
-      "id": "goal",
-      "label": "Keep stands",
+      "id": "whitelist",
+      "label": "Whitelist",
       "options": [
        "Star Platinum",
        "The World",
        "Killer Queen",
+       "Crazy Diamond",
        "Gold Experience",
        "King Crimson",
-       "Tusk",
+       "Made in Heaven",
        "D4C",
-       "Whitesnake",
-       "Made in Heaven"
+       "C-Moon",
+       "Whitesnake"
       ]
-     },
-     {
-      "type": "slider",
-      "id": "arrows",
-      "label": "Max arrows",
-      "min": 1,
-      "max": 100,
-      "value": 10
-     },
-     {
-      "type": "select",
-      "id": "fail",
-      "label": "On fail",
-      "options": [
-       "Use Roka",
-       "Keep rolling",
-       "Stop"
-      ],
-      "value": "Use Roka"
      },
      {
       "type": "checkbox",
       "id": "stop_rare",
-      "label": "Stop on rare skin",
+      "label": "Stop on rare",
       "value": true
      },
      {
       "type": "checkbox",
       "id": "log",
-      "label": "Log results",
+      "label": "Log rolls",
       "value": true
+     },
+     {
+      "type": "slider",
+      "id": "delay",
+      "label": "Roll delay",
+      "min": 0.5,
+      "max": 10,
+      "value": 2,
+      "decimals": 1,
+      "suffix": "s"
+     },
+     {
+      "type": "keybind",
+      "id": "roll_key",
+      "label": "Toggle key"
      }
     ],
-    "path": "farm.auto_roll"
+    "path": "farm.roll"
    },
    {
-    "id": "auto_quest",
-    "title": "Auto Quest",
-    "icon": "list",
-    "pill": "Quest",
-    "toggle": false,
+    "id": "collect",
+    "title": "Auto Collect",
+    "icon": "package",
+    "pill": "Loot",
+    "toggle": true,
+    "desc": "ТП к спавну итема и подбор по приоритету",
     "fields": [
      {
-      "type": "select",
-      "id": "chain",
-      "label": "Chain",
+      "type": "multi",
+      "id": "items",
+      "label": "Item priority",
       "options": [
-       "Auto",
-       "Storyline",
-       "DIO",
-       "Jotaro",
-       "Jesus"
-      ],
-      "value": "Auto"
+       "Roka",
+       "Pure Roka",
+       "Arrow",
+       "Diary",
+       "Corpse Parts",
+       "Rib Cage",
+       "Lucky Arrow"
+      ]
      },
+     {
+      "type": "checkbox",
+      "id": "tp",
+      "label": "TP to item",
+      "value": true
+     },
+     {
+      "type": "slider",
+      "id": "max_distance",
+      "label": "Max distance",
+      "min": 20,
+      "max": 800,
+      "value": 400,
+      "suffix": " st"
+     },
+     {
+      "type": "slider",
+      "id": "delay",
+      "label": "Scan delay",
+      "min": 0.2,
+      "max": 5,
+      "value": 0.8,
+      "decimals": 1,
+      "suffix": "s"
+     }
+    ],
+    "path": "farm.collect"
+   },
+   {
+    "id": "quest",
+    "title": "Auto Quest",
+    "icon": "scroll",
+    "pill": "Quest",
+    "toggle": true,
+    "desc": "Берёт и сдаёт квесты по NPC-цепочке",
+    "fields": [
      {
       "type": "checkbox",
       "id": "accept",
@@ -1069,51 +931,53 @@ window.YBASSFT_TABS = [
      },
      {
       "type": "checkbox",
-      "id": "skip",
-      "label": "Skip dialogue",
+      "id": "turn_in",
+      "label": "Auto turn in",
       "value": true
      },
      {
       "type": "slider",
-      "id": "speed",
-      "label": "Dialogue speed",
-      "min": 0.05,
-      "max": 1,
-      "value": 0.1,
-      "decimals": 2,
+      "id": "delay",
+      "label": "Delay",
+      "min": 1,
+      "max": 30,
+      "value": 3,
       "suffix": "s"
-     },
-     {
-      "type": "checkbox",
-      "id": "turnin",
-      "label": "Auto turn in",
-      "value": true
      }
     ],
-    "path": "farm.auto_quest"
+    "path": "farm.quest"
    },
    {
     "id": "stats",
     "title": "Farm Stats",
-    "icon": "gauge",
-    "pill": "Live",
-    "toggle": false,
+    "icon": "chart",
+    "pill": "Stats",
+    "desc": "Счётчики в HUD фарма",
     "fields": [
      {
-      "type": "hint",
-      "label": "Kills, cycles and money per hour are shown in the HUD"
+      "type": "checkbox",
+      "id": "kills",
+      "label": "Kill counter",
+      "value": true
+     },
+     {
+      "type": "checkbox",
+      "id": "cycle",
+      "label": "Cycle time",
+      "value": true
+     },
+     {
+      "type": "checkbox",
+      "id": "money",
+      "label": "Money / hour",
+      "value": true
      },
      {
       "type": "button",
       "id": "reset",
       "text": "Reset stats",
-      "icon": "rotate-ccw"
-     },
-     {
-      "type": "button",
-      "id": "copy",
-      "text": "Copy session report",
-      "icon": "save"
+      "icon": "rotate-ccw",
+      "action": "farm.reset"
      }
     ],
     "path": "farm.stats"
@@ -1126,12 +990,243 @@ window.YBASSFT_TABS = [
   "title": "Visuals",
   "cards": [
    {
+    "id": "players",
+    "title": "Player ESP",
+    "icon": "users",
+    "pill": "ESP",
+    "toggle": true,
+    "desc": "Бокс, имя, дистанция, HP, chams, трассеры",
+    "fields": [
+     {
+      "type": "checkbox",
+      "id": "box",
+      "label": "Box",
+      "value": true
+     },
+     {
+      "type": "checkbox",
+      "id": "name",
+      "label": "Name",
+      "value": true
+     },
+     {
+      "type": "checkbox",
+      "id": "distance",
+      "label": "Distance",
+      "value": true
+     },
+     {
+      "type": "checkbox",
+      "id": "health",
+      "label": "Health bar",
+      "value": true
+     },
+     {
+      "type": "checkbox",
+      "id": "chams",
+      "label": "Chams"
+     },
+     {
+      "type": "checkbox",
+      "id": "tracers",
+      "label": "Tracers"
+     },
+     {
+      "type": "slider",
+      "id": "max_distance",
+      "label": "Max distance",
+      "min": 50,
+      "max": 2000,
+      "value": 500,
+      "suffix": " st"
+     }
+    ],
+    "path": "visuals.players"
+   },
+   {
+    "id": "items",
+    "title": "Item ESP",
+    "icon": "package",
+    "pill": "Loot",
+    "toggle": true,
+    "desc": "Roka, Pure Roka, Corpse Parts, Diary, Lucky Arrow, Rib Cage",
+    "fields": [
+     {
+      "type": "checkbox",
+      "id": "rare_only",
+      "label": "Rare only",
+      "value": false
+     },
+     {
+      "type": "checkbox",
+      "id": "sound",
+      "label": "Sound alert",
+      "value": true
+     },
+     {
+      "type": "checkbox",
+      "id": "names",
+      "label": "Show names",
+      "value": true
+     },
+     {
+      "type": "slider",
+      "id": "max_distance",
+      "label": "Max distance",
+      "min": 50,
+      "max": 1500,
+      "value": 400,
+      "suffix": " st"
+     }
+    ],
+    "path": "visuals.items"
+   },
+   {
+    "id": "npcs",
+    "title": "NPC ESP",
+    "icon": "bot",
+    "pill": "NPC",
+    "toggle": true,
+    "desc": "Мобы и боссы, приоритет по имени",
+    "fields": [
+     {
+      "type": "checkbox",
+      "id": "bosses",
+      "label": "Bosses only"
+     },
+     {
+      "type": "slider",
+      "id": "max_distance",
+      "label": "Max distance",
+      "min": 50,
+      "max": 1500,
+      "value": 600,
+      "suffix": " st"
+     }
+    ],
+    "path": "visuals.npcs"
+   },
+   {
+    "id": "remove_mih",
+    "title": "Remove MIH Reset",
+    "icon": "sun",
+    "pill": "MIH",
+    "toggle": true,
+    "desc": "Убирает анимацию world reset без нагрузки на кадры",
+    "fields": [
+     {
+      "type": "checkbox",
+      "id": "reset_anim",
+      "label": "Reset animation",
+      "value": true
+     },
+     {
+      "type": "checkbox",
+      "id": "particles",
+      "label": "Particles",
+      "value": true
+     }
+    ],
+    "path": "visuals.remove_mih"
+   },
+   {
+    "id": "remove_kq",
+    "title": "Remove KQ Effects",
+    "icon": "bomb",
+    "pill": "KQ",
+    "toggle": true,
+    "desc": "Взрывы и партиклы Killer Queen и Bites the Dust",
+    "fields": [
+     {
+      "type": "checkbox",
+      "id": "explosions",
+      "label": "Explosion effects",
+      "value": true
+     },
+     {
+      "type": "checkbox",
+      "id": "particles",
+      "label": "Particles",
+      "value": true
+     }
+    ],
+    "path": "visuals.remove_kq"
+   },
+   {
+    "id": "low_gfx",
+    "title": "Low GFX",
+    "icon": "monitor",
+    "pill": "FPS",
+    "toggle": true,
+    "desc": "Режет VFX, партиклы и постобработку через Modules.Composer",
+    "fields": [
+     {
+      "type": "checkbox",
+      "id": "vfx",
+      "label": "VFX",
+      "value": true
+     },
+     {
+      "type": "checkbox",
+      "id": "particles",
+      "label": "Particles",
+      "value": true
+     },
+     {
+      "type": "checkbox",
+      "id": "postfx",
+      "label": "Post FX",
+      "value": true
+     },
+     {
+      "type": "checkbox",
+      "id": "shadows",
+      "label": "Shadows",
+      "value": true
+     }
+    ],
+    "path": "visuals.low_gfx"
+   },
+   {
+    "id": "camera",
+    "title": "Camera",
+    "icon": "camera",
+    "pill": "View",
+    "toggle": true,
+    "desc": "FOV unlock, zoom unlock, freecam",
+    "fields": [
+     {
+      "type": "slider",
+      "id": "fov",
+      "label": "FOV",
+      "min": 50,
+      "max": 120,
+      "value": 70
+     },
+     {
+      "type": "slider",
+      "id": "zoom",
+      "label": "Max zoom",
+      "min": 32,
+      "max": 512,
+      "value": 128
+     },
+     {
+      "type": "checkbox",
+      "id": "freecam",
+      "label": "Freecam"
+     }
+    ],
+    "path": "visuals.camera"
+   },
+   {
     "id": "hud",
     "title": "HUD",
-    "icon": "monitor",
-    "pill": "Overlay",
+    "icon": "layout",
+    "pill": "HUD",
     "toggle": true,
-    "desc": "Выбери что показывать в оверлее",
+    "value": true,
+    "desc": "Watermark, keybinds и счётчики",
     "fields": [
      {
       "type": "checkbox",
@@ -1183,327 +1278,6 @@ window.YBASSFT_TABS = [
      }
     ],
     "path": "visuals.hud"
-   },
-   {
-    "id": "player_esp",
-    "title": "Player ESP",
-    "icon": "users",
-    "pill": "ESP",
-    "toggle": true,
-    "fields": [
-     {
-      "type": "checkbox",
-      "id": "name",
-      "label": "Name",
-      "value": true
-     },
-     {
-      "type": "checkbox",
-      "id": "box",
-      "label": "Box",
-      "value": true
-     },
-     {
-      "type": "checkbox",
-      "id": "hp",
-      "label": "Health",
-      "value": true
-     },
-     {
-      "type": "checkbox",
-      "id": "distance",
-      "label": "Distance",
-      "value": true
-     },
-     {
-      "type": "checkbox",
-      "id": "tracer",
-      "label": "Tracer",
-      "value": false
-     },
-     {
-      "type": "checkbox",
-      "id": "chams",
-      "label": "Chams",
-      "value": false
-     },
-     {
-      "type": "slider",
-      "id": "max",
-      "label": "Max distance",
-      "min": 50,
-      "max": 2000,
-      "value": 500,
-      "suffix": " st"
-     },
-     {
-      "type": "select",
-      "id": "color",
-      "label": "Color",
-      "options": [
-       "Theme",
-       "Red",
-       "Green",
-       "Cyan",
-       "White"
-      ],
-      "value": "Theme"
-     }
-    ],
-    "path": "visuals.player_esp"
-   },
-   {
-    "id": "item_esp",
-    "title": "Item ESP",
-    "icon": "package",
-    "pill": "Loot",
-    "toggle": true,
-    "fields": [
-     {
-      "type": "multi",
-      "id": "priority",
-      "label": "Priority",
-      "options": [
-       "Roka",
-       "Pure Roka",
-       "Corpse Part",
-       "Diary",
-       "Lucky Arrow",
-       "Rib Cage",
-       "Any"
-      ]
-     },
-     {
-      "type": "slider",
-      "id": "max",
-      "label": "Max distance",
-      "min": 100,
-      "max": 3000,
-      "value": 900,
-      "suffix": " st"
-     },
-     {
-      "type": "checkbox",
-      "id": "beam",
-      "label": "Beam marker",
-      "value": true
-     },
-     {
-      "type": "checkbox",
-      "id": "sound",
-      "label": "Sound on spawn",
-      "value": true
-     }
-    ],
-    "path": "visuals.item_esp"
-   },
-   {
-    "id": "npc_esp",
-    "title": "NPC ESP",
-    "icon": "skull",
-    "pill": "ESP",
-    "toggle": false,
-    "fields": [
-     {
-      "type": "multi",
-      "id": "filter",
-      "label": "Show",
-      "options": [
-       "NPC",
-       "Boss",
-       "Dummy",
-       "Quest"
-      ]
-     },
-     {
-      "type": "slider",
-      "id": "max",
-      "label": "Max distance",
-      "min": 50,
-      "max": 2000,
-      "value": 400,
-      "suffix": " st"
-     }
-    ],
-    "path": "visuals.npc_esp"
-   },
-   {
-    "id": "effects",
-    "title": "Effects",
-    "icon": "sparkles",
-    "pill": "VFX",
-    "toggle": true,
-    "desc": "Режет тяжёлые эффекты, чтобы не лагало",
-    "fields": [
-     {
-      "type": "checkbox",
-      "id": "worldreset",
-      "label": "Remove world reset animation",
-      "value": true
-     },
-     {
-      "type": "checkbox",
-      "id": "kq",
-      "label": "Remove Killer Queen explosions",
-      "value": true
-     },
-     {
-      "type": "checkbox",
-      "id": "kqbtd",
-      "label": "Remove KQ: Bites the Dust explosion",
-      "value": true
-     },
-     {
-      "type": "checkbox",
-      "id": "ability_vfx",
-      "label": "Remove ability VFX",
-      "value": false
-     },
-     {
-      "type": "checkbox",
-      "id": "cutscenes",
-      "label": "Skip cutscenes",
-      "value": false
-     },
-     {
-      "type": "checkbox",
-      "id": "speedlines",
-      "label": "Remove speed lines",
-      "value": false
-     }
-    ],
-    "path": "visuals.effects"
-   },
-   {
-    "id": "graphics",
-    "title": "Graphics",
-    "icon": "cpu",
-    "pill": "FPS",
-    "toggle": true,
-    "fields": [
-     {
-      "type": "select",
-      "id": "quality",
-      "label": "Quality",
-      "options": [
-       "Low",
-       "Medium",
-       "High",
-       "Custom"
-      ],
-      "value": "Low"
-     },
-     {
-      "type": "checkbox",
-      "id": "post",
-      "label": "Disable post-processing",
-      "value": true
-     },
-     {
-      "type": "checkbox",
-      "id": "particles",
-      "label": "Disable particles",
-      "value": true
-     },
-     {
-      "type": "checkbox",
-      "id": "shadows",
-      "label": "Disable shadows",
-      "value": false
-     },
-     {
-      "type": "slider",
-      "id": "fps",
-      "label": "FPS cap",
-      "min": 30,
-      "max": 360,
-      "value": 240
-     }
-    ],
-    "path": "visuals.graphics"
-   },
-   {
-    "id": "camera",
-    "title": "Camera",
-    "icon": "eye",
-    "pill": "View",
-    "toggle": true,
-    "fields": [
-     {
-      "type": "slider",
-      "id": "fov",
-      "label": "FOV",
-      "min": 40,
-      "max": 120,
-      "value": 70
-     },
-     {
-      "type": "checkbox",
-      "id": "zoom",
-      "label": "Unlock zoom",
-      "value": true
-     },
-     {
-      "type": "checkbox",
-      "id": "freecam",
-      "label": "Freecam",
-      "value": false
-     },
-     {
-      "type": "checkbox",
-      "id": "shake",
-      "label": "Remove camera shake",
-      "value": true
-     },
-     {
-      "type": "keybind",
-      "id": "key",
-      "label": "Freecam key"
-     }
-    ],
-    "path": "visuals.camera"
-   },
-   {
-    "id": "trackers",
-    "title": "Rage & Barrage",
-    "icon": "flame",
-    "pill": "Track",
-    "toggle": true,
-    "fields": [
-     {
-      "type": "checkbox",
-      "id": "rage",
-      "label": "Rage tracker",
-      "value": true
-     },
-     {
-      "type": "checkbox",
-      "id": "barrage",
-      "label": "Barrage timer",
-      "value": true
-     },
-     {
-      "type": "select",
-      "id": "mode",
-      "label": "Display",
-      "options": [
-       "HUD row",
-       "Bar",
-       "Both"
-      ],
-      "value": "HUD row"
-     },
-     {
-      "type": "slider",
-      "id": "warn",
-      "label": "Warn under",
-      "min": 5,
-      "max": 50,
-      "value": 20,
-      "suffix": "%"
-     }
-    ],
-    "path": "visuals.trackers"
    }
   ]
  },
@@ -1515,32 +1289,22 @@ window.YBASSFT_TABS = [
    {
     "id": "anti_ts",
     "title": "Anti Time Stop",
-    "icon": "timer",
-    "pill": "Anti",
+    "icon": "clock",
+    "pill": "TS",
     "toggle": true,
+    "desc": "Камера и инпут не залипают в таймстопе",
     "fields": [
      {
-      "type": "select",
-      "id": "mode",
-      "label": "Mode",
-      "options": [
-       "Input",
-       "Visual",
-       "Both"
-      ],
-      "value": "Both"
-     },
-     {
       "type": "checkbox",
-      "id": "camera",
+      "id": "restore_camera",
       "label": "Restore camera",
       "value": true
      },
      {
       "type": "checkbox",
-      "id": "notify",
-      "label": "Notify on stop",
-      "value": false
+      "id": "restore_input",
+      "label": "Restore input",
+      "value": true
      }
     ],
     "path": "protection.anti_ts"
@@ -1548,27 +1312,21 @@ window.YBASSFT_TABS = [
    {
     "id": "anti_ger",
     "title": "Anti GER",
-    "icon": "rotate-ccw",
-    "pill": "Anti",
+    "icon": "refresh",
+    "pill": "GER",
     "toggle": true,
-    "desc": "Возврат состояния после reset-to-zero",
+    "desc": "Возврат из reset-to-zero, стенд и абилки не сбрасываются",
     "fields": [
      {
       "type": "checkbox",
-      "id": "stand",
-      "label": "Restore stand",
+      "id": "keep_stand",
+      "label": "Keep stand",
       "value": true
      },
      {
       "type": "checkbox",
-      "id": "anim",
-      "label": "Block reset animation",
-      "value": true
-     },
-     {
-      "type": "checkbox",
-      "id": "restore",
-      "label": "Restore ability state",
+      "id": "keep_abilities",
+      "label": "Keep abilities",
       "value": true
      }
     ],
@@ -1577,25 +1335,15 @@ window.YBASSFT_TABS = [
    {
     "id": "anti_erase",
     "title": "Anti Time Erase",
-    "icon": "wind",
-    "pill": "Anti",
+    "icon": "history",
+    "pill": "KC",
     "toggle": true,
+    "desc": "Выход из пропуска KC/KCR",
     "fields": [
      {
-      "type": "select",
-      "id": "mode",
-      "label": "Mode",
-      "options": [
-       "Position",
-       "State",
-       "Both"
-      ],
-      "value": "Both"
-     },
-     {
       "type": "checkbox",
-      "id": "cancel",
-      "label": "Cancel stun after",
+      "id": "restore_pos",
+      "label": "Restore position",
       "value": true
      }
     ],
@@ -1604,30 +1352,21 @@ window.YBASSFT_TABS = [
    {
     "id": "anti_stun",
     "title": "Anti Stun",
-    "icon": "activity",
-    "pill": "Anti",
+    "icon": "hand",
+    "pill": "Stun",
     "toggle": true,
+    "desc": "Быстрый выход из стана и рэгдолла",
     "fields": [
      {
       "type": "checkbox",
-      "id": "ragdoll",
+      "id": "cancel",
       "label": "Cancel ragdoll",
       "value": true
      },
      {
-      "type": "slider",
-      "id": "max",
-      "label": "Max stun time",
-      "min": 0,
-      "max": 2,
-      "value": 0.15,
-      "decimals": 2,
-      "suffix": "s"
-     },
-     {
       "type": "checkbox",
-      "id": "anim",
-      "label": "Reset animation",
+      "id": "clear_joints",
+      "label": "Clear joints",
       "value": true
      }
     ],
@@ -1636,81 +1375,58 @@ window.YBASSFT_TABS = [
    {
     "id": "anti_slow",
     "title": "Anti Slow",
-    "icon": "gauge",
-    "pill": "Anti",
+    "icon": "rabbit",
+    "pill": "Slow",
     "toggle": true,
+    "desc": "Снимает дебаффы скорости от абилок",
     "fields": [
      {
-      "type": "checkbox",
-      "id": "walk",
-      "label": "Restore WalkSpeed",
-      "value": true
-     },
-     {
-      "type": "checkbox",
-      "id": "jump",
-      "label": "Restore JumpPower",
-      "value": true
+      "type": "slider",
+      "id": "minimum",
+      "label": "Min speed",
+      "min": 16,
+      "max": 60,
+      "value": 16
      }
     ],
     "path": "protection.anti_slow"
    },
    {
-    "id": "anti_void",
-    "title": "Anti Void",
-    "icon": "arrow-up-right",
-    "pill": "Safe",
-    "toggle": true,
-    "fields": [
-     {
-      "type": "slider",
-      "id": "height",
-      "label": "Min height",
-      "min": -200,
-      "max": 0,
-      "value": -40
-     },
-     {
-      "type": "checkbox",
-      "id": "spawn",
-      "label": "Teleport to spawn",
-      "value": true
-     },
-     {
-      "type": "checkbox",
-      "id": "reset",
-      "label": "Respawn if stuck",
-      "value": false
-     }
-    ],
-    "path": "protection.anti_void"
-   },
-   {
     "id": "anti_kick",
     "title": "Anti Kick",
-    "icon": "lock",
-    "pill": "Guard",
-    "toggle": false,
+    "icon": "shield-off",
+    "pill": "Soft",
+    "toggle": true,
+    "desc": "Мягкий фильтр кик-причин, без палева",
     "fields": [
-     {
-      "type": "select",
-      "id": "mode",
-      "label": "Mode",
-      "options": [
-       "Soft",
-       "Silent",
-       "Strict"
-      ],
-      "value": "Soft"
-     },
      {
       "type": "checkbox",
       "id": "log",
-      "label": "Log to console",
-      "value": true
+      "label": "Log kick reasons",
+      "value": false
      }
     ],
     "path": "protection.anti_kick"
+   },
+   {
+    "id": "anti_void",
+    "title": "Anti Void",
+    "icon": "anchor",
+    "pill": "Void",
+    "toggle": true,
+    "value": true,
+    "desc": "Упал за карту — вернуло на последнюю точку",
+    "fields": [
+     {
+      "type": "slider",
+      "id": "threshold",
+      "label": "Y threshold",
+      "min": -200,
+      "max": 0,
+      "value": -50
+     }
+    ],
+    "path": "protection.anti_void"
    }
   ]
  },
@@ -1723,85 +1439,83 @@ window.YBASSFT_TABS = [
     "id": "config",
     "title": "Config",
     "icon": "save",
-    "pill": "Save",
-    "toggle": false,
+    "pill": "v1.0",
+    "desc": "Профили, автосейв, загрузка",
     "fields": [
      {
       "type": "button",
       "id": "save",
-      "text": "Save current config",
+      "text": "Save config",
       "icon": "save",
-      "role": "accent"
-     },
-     {
-      "type": "multi",
-      "id": "slots",
-      "label": "Profiles",
-      "options": [
-       "default",
-       "pvp",
-       "farm",
-       "afk"
-      ]
+      "action": "files.config.save"
      },
      {
       "type": "button",
       "id": "load",
-      "text": "Load selected",
-      "icon": "upload"
+      "text": "Load config",
+      "icon": "upload",
+      "action": "files.config.load"
      },
      {
       "type": "button",
       "id": "delete",
-      "text": "Delete selected",
-      "icon": "trash-2"
+      "text": "Delete config",
+      "icon": "trash-2",
+      "action": "files.config.delete"
+     },
+     {
+      "type": "checkbox",
+      "id": "autosave",
+      "label": "Autosave on unload",
+      "value": true
      }
     ],
     "path": "files.config"
    },
    {
-    "id": "interface",
-    "title": "Interface",
-    "icon": "palette",
-    "pill": "UI",
-    "toggle": false,
+    "id": "keybinds",
+    "title": "Keybinds",
+    "icon": "keyboard",
+    "pill": "Keys",
+    "desc": "Список биндов и очистка",
     "fields": [
      {
-      "type": "select",
-      "id": "theme",
-      "label": "Theme",
-      "options": [
-       "Violet",
-       "Midnight",
-       "Crimson",
-       "Emerald",
-       "Amber",
-       "JoJo Gold",
-       "Mono"
-      ],
-      "value": "Violet",
-      "icon": "palette"
+      "type": "button",
+      "id": "list",
+      "text": "List keybinds",
+      "icon": "list",
+      "action": "files.keybinds.list"
      },
+     {
+      "type": "button",
+      "id": "clear",
+      "text": "Clear keybinds",
+      "icon": "eraser",
+      "action": "files.keybinds.clear"
+     }
+    ],
+    "path": "files.keybinds"
+   },
+   {
+    "id": "interface",
+    "title": "Interface",
+    "icon": "layout",
+    "pill": "UI",
+    "desc": "Тема, масштаб, блюр, клавиша меню",
+    "fields": [
      {
       "type": "slider",
       "id": "scale",
       "label": "Scale",
       "min": 0.7,
-      "max": 1.3,
+      "max": 1.4,
       "value": 1,
       "decimals": 2
      },
      {
       "type": "checkbox",
       "id": "blur",
-      "label": "Background blur",
-      "value": false
-     },
-     {
-      "type": "checkbox",
-      "id": "animations",
-      "label": "Animations",
-      "value": true
+      "label": "Blur background"
      },
      {
       "type": "keybind",
@@ -1816,60 +1530,32 @@ window.YBASSFT_TABS = [
     "id": "about",
     "title": "About",
     "icon": "info",
-    "pill": "v1.0",
-    "toggle": false,
+    "pill": "Build",
+    "desc": "Загрузка с GitHub, reload, unload",
     "fields": [
-     {
-      "type": "hint",
-      "label": "ybassft — YBA utility. GUI stage build, features wiring in progress."
-     },
      {
       "type": "button",
       "id": "copy",
       "text": "Copy loadstring",
-      "icon": "terminal"
+      "icon": "terminal",
+      "action": "files.about.copy"
      },
      {
       "type": "button",
       "id": "reload",
-      "text": "Reload script",
-      "icon": "refresh-cw"
+      "text": "Reload",
+      "icon": "rotate-ccw",
+      "action": "files.about.reload"
      },
      {
       "type": "button",
       "id": "unload",
       "text": "Unload",
       "icon": "power",
-      "role": "accent"
+      "action": "files.about.unload"
      }
     ],
     "path": "files.about"
-   },
-   {
-    "id": "keybinds",
-    "title": "Keybinds",
-    "icon": "keyboard",
-    "pill": "Keys",
-    "toggle": false,
-    "fields": [
-     {
-      "type": "hint",
-      "label": "Show every active keybind in one list"
-     },
-     {
-      "type": "button",
-      "id": "list",
-      "text": "List keybinds",
-      "icon": "list"
-     },
-     {
-      "type": "button",
-      "id": "clear",
-      "text": "Clear all",
-      "icon": "trash-2"
-     }
-    ],
-    "path": "files.keybinds"
    }
   ]
  }

@@ -15,6 +15,7 @@ return function(ctx)
 	local body = nil
 	local cards = {}
 	local tabs = {}
+	local actions = {}
 	local activeTab = nil
 	local built = {}
 	local menus = {}
@@ -62,6 +63,64 @@ return function(ctx)
 		Window.build()
 	end
 
+	local function bindCard(spec)
+		if spec.toggle then
+			spec.value = store.get(spec.path .. ".enabled", true)
+			spec.onToggle = function(state)
+				store.set(spec.path .. ".enabled", state)
+			end
+		end
+		for _, field in ipairs(spec.fields or {}) do
+			local path = spec.path .. "." .. field.id
+			if field.type == "select" then
+				field.value = store.get(path, field.value)
+				field.onChange = function(option)
+					store.set(path, option)
+				end
+			elseif field.type == "multi" then
+				local current = store.get(path, {})
+				if type(current) == "table" then
+					local list = {}
+					for key, value in pairs(current) do
+						if type(key) == "number" then
+							table.insert(list, value)
+						elseif value then
+							table.insert(list, key)
+						end
+					end
+					field.value = list
+				else
+					field.value = {}
+				end
+				field.onChange = function(list)
+					store.set(path, list)
+				end
+			elseif field.type == "slider" then
+				field.value = store.get(path, field.value or field.min or 0)
+				field.onChange = function(value)
+					store.set(path, value)
+				end
+			elseif field.type == "checkbox" then
+				field.value = store.get(path, field.value)
+				field.onChange = function(value)
+					store.set(path, value)
+				end
+			elseif field.type == "keybind" then
+				field.value = store.get(path, field.value)
+				field.onChange = function(value)
+					store.set(path, value)
+				end
+			elseif field.type == "button" then
+				field.onClick = function()
+					local handler = field.action and actions[field.action]
+					if handler then
+						handler()
+					end
+				end
+			end
+		end
+	end
+
 	local function buildTab(id)
 		local tab = nil
 		for _, item in ipairs(tabs) do
@@ -107,6 +166,7 @@ return function(ctx)
 
 		for index, cardSpec in ipairs(tab.cards) do
 			local column = frames[((index - 1) % columns) + 1]
+			bindCard(cardSpec)
 			local card = Components.card(column, cardSpec, index)
 			table.insert(cards, card)
 		end
@@ -519,9 +579,10 @@ return function(ctx)
 		end
 	end
 
-	function Window.init(parent, tabsRef, storeRef)
+	function Window.init(parent, tabsRef, storeRef, actionsRef)
 		store = storeRef
 		tabs = tabsRef
+		actions = actionsRef or {}
 
 		root = Util.create("Frame", {
 			Name = "ybassft",

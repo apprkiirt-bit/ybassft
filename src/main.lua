@@ -29,6 +29,12 @@ local Notify = require("ui.notify")
 local Window = require("ui.window")
 local HUD = require("ui.hud")
 local Registry = require("features.registry")
+local Yba = require("features.yba")
+local Combat = require("features.combat")
+local Movement = require("features.movement")
+local Visuals = require("features.visuals")
+local Farm = require("features.farm")
+local Protection = require("features.protection")
 
 Icons.setup(RAW, join(RAW, "assets", "icons"))
 Config.init()
@@ -70,8 +76,45 @@ local function applyTheme(label, animated)
 end
 
 Notify.init(screen)
-Window.init(screen, Registry.tabs, Store)
+Registry.actions = {}
+Window.init(screen, Registry.tabs, Store, Registry.actions)
 HUD.init(screen, Store, Registry)
+
+local keyHandlers = {}
+local ctx = {
+	store = Store,
+	HUD = HUD,
+	Target = nil,
+	onKey = function(path, handler)
+		keyHandlers[path] = handler
+	end,
+}
+
+Yba.init()
+Combat.init(Store)
+Movement.init(Store)
+Visuals.init(Store)
+Farm.init(Store)
+Protection.init(Store)
+
+ctx.Combat = Combat
+ctx.Movement = Movement
+ctx.Visuals = Visuals
+ctx.Farm = Farm
+ctx.Protection = Protection
+
+game:GetService("UserInputService").InputBegan:Connect(function(inputObject, processed)
+	if processed then
+		return
+	end
+	for path, handler in pairs(keyHandlers) do
+		local bound = Store.get(path)
+		if bound and bound ~= "" and inputObject.KeyCode.Name == tostring(bound) then
+			handler()
+			return
+		end
+	end
+end)
 
 local function applyScale()
 	local scale = Store.get("files.interface.scale", 1)
@@ -160,7 +203,7 @@ Store.on("files.interface.menu_key", function(value)
 	menuKey = value or "RightShift"
 end)
 
-Registry.actions = {
+local actionList = {
 	["files.config.save"] = function()
 		local ok = Config.save("autoload", Store.snapshot())
 		Notify.push({ title = ok and "Config saved" or "Save failed", icon = "save" })
@@ -236,9 +279,46 @@ Registry.actions = {
 		Window.build()
 		Notify.push({ title = "Keybinds cleared", icon = "trash-2" })
 	end,
+	["movement.to_cursor"] = function()
+		Movement.teleportToCursor()
+	end,
+	["movement.to_target"] = function()
+		local best = Yba.bestTarget({ players = true, npcs = true, range = 5000, mode = "Nearest" })
+		if best then
+			Movement.teleport(Yba.rootOf(best.model).Position + Vector3.new(0, 3, 0))
+		end
+	end,
+	["movement.to_player"] = function()
+		local slot = Store.get("movement.teleport.player", "Nearest")
+		Movement.teleportToPlayer(slot)
+	end,
+	["movement.waypoint_save"] = function()
+		Movement.saveWaypoint(Store.get("movement.waypoints.slot", "W1"))
+		Notify.push({ title = "Waypoint saved", icon = "map-pin" })
+	end,
+	["movement.waypoint_go"] = function()
+		Movement.teleportToWaypoint(Store.get("movement.waypoints.slot", "W1"))
+	end,
+	["movement.waypoint_delete"] = function()
+		Movement.deleteWaypoint(Store.get("movement.waypoints.slot", "W1"))
+		Notify.push({ title = "Waypoint deleted", icon = "trash-2" })
+	end,
+	["farm.reset"] = function()
+		Farm.resetStats()
+		Notify.push({ title = "Farm stats reset", icon = "rotate-ccw" })
+	end,
 }
 
+for key, fn in pairs(actionList) do
+	Registry.actions[key] = fn
+end
+
 local function unload()
+	if Store.get("files.config.autosave", true) then
+		pcall(function()
+			Config.save("autoload", Store.snapshot())
+		end)
+	end
 	pcall(function()
 		if blur then
 			blur:Destroy()
