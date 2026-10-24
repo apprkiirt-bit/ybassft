@@ -5,28 +5,27 @@ return function(ctx)
 
 	local Notify = {}
 	local holder = nil
-	local active = {}
+	local counter = 0
 
 	function Notify.init(parent)
 		holder = Util.create("Frame", {
 			Name = "Notifications",
-			AnchorPoint = Vector2.new(1, 1),
-			Position = UDim2.new(1, -14, 1, -14),
-			Size = UDim2.fromOffset(220, 300),
+			AnchorPoint = Vector2.new(0.5, 1),
+			Position = UDim2.new(0.5, 0, 1, -16),
+			Size = UDim2.fromOffset(0, 0),
+			AutomaticSize = Enum.AutomaticSize.XY,
 			BackgroundTransparency = 1,
 			ZIndex = 400,
 			Parent = parent,
 		})
-		Util.create("UIListLayout", {
-			Padding = UDim.new(0, 6),
+		Util.list({
+			Padding = UDim.new(0, 3),
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			HorizontalAlignment = Enum.HorizontalAlignment.Right,
+			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			VerticalAlignment = Enum.VerticalAlignment.Bottom,
 			Parent = holder,
 		})
 	end
-
-	local counter = 0
 
 	function Notify.push(opts)
 		if not holder then
@@ -34,89 +33,91 @@ return function(ctx)
 		end
 		counter = counter + 1
 		local data = type(opts) == "table" and opts or { title = tostring(opts) }
-		local card = Util.create("Frame", {
-			Size = UDim2.new(1, 0, 0, 0),
-			AutomaticSize = Enum.AutomaticSize.Y,
+
+		local pill = Util.create("Frame", {
 			BackgroundColor3 = Theme.color("panel"),
-			BackgroundTransparency = 1,
+			BackgroundTransparency = 0,
+			Size = UDim2.fromOffset(0, 22),
+			AutomaticSize = Enum.AutomaticSize.X,
 			LayoutOrder = counter,
-			ClipsDescendants = true,
 			ZIndex = 401,
 			Parent = holder,
 		})
-		Util.corner(10)
-		local stroke = Util.stroke(Theme.color("border"), 1, 1)
-		stroke.Parent = card
+		Util.corner(4)
+		local stroke = Util.stroke(Theme.color("border"), 1, 0)
+		stroke.Parent = pill
+		Theme.bind(pill, "BackgroundColor3", "panel")
+		Theme.bind(stroke, "Color", "border")
 		Util.create("UIPadding", {
-			PaddingTop = UDim.new(0, 9),
-			PaddingBottom = UDim.new(0, 9),
-			PaddingLeft = UDim.new(0, 9),
-			PaddingRight = UDim.new(0, 9),
-			Parent = card,
+			PaddingLeft = UDim.new(0, 8),
+			PaddingRight = UDim.new(0, 8),
+			Parent = pill,
 		})
-		Util.list({ Padding = UDim.new(0, 2), Parent = card })
+		Util.hlist({ Padding = UDim.new(0, 7), Parent = pill })
 
-		local accent = Util.create("Frame", {
-			AnchorPoint = Vector2.new(0, 0.5),
-			Position = UDim2.new(0, -9, 0.5, 0),
-			Size = UDim2.fromOffset(2, 26),
-			BackgroundColor3 = Theme.color("accent"),
-			BorderSizePixel = 0,
-			ZIndex = 403,
-			Parent = card,
-		})
-		Util.corner(2)
-
-		local head = Util.create("Frame", {
-			BackgroundTransparency = 1,
-			Size = UDim2.new(1, 0, 0, 13),
-			LayoutOrder = 1,
-			ZIndex = 402,
-			Parent = card,
-		})
-		Components.icon(head, data.icon or "bell", 15, "accent")
-		local title = Components.text(head, {
-			Text = data.title or "Notification",
-			TextSize = 11,
-			Font = Util.Fonts.medium,
-			Position = UDim2.fromOffset(17, 0),
-			Size = UDim2.new(1, -17, 1, 0),
-			ZIndex = 402,
-		})
-		title.TextTruncate = Enum.TextTruncate.AtEnd
-
-		if data.body then
-			local body = Components.text(card, {
-				Text = data.body,
-				TextSize = 10,
-				TextWrapped = true,
-				AutomaticSize = Enum.AutomaticSize.Y,
-				Size = UDim2.new(1, 0, 0, 0),
-				LayoutOrder = 2,
-				ZIndex = 402,
-				__role = "muted",
+		if data.toggle ~= nil then
+			local track = Util.create("Frame", {
+				BackgroundColor3 = Theme.color(data.toggle and "accent" or "track"),
+				Size = UDim2.fromOffset(15, 8),
+				LayoutOrder = 1,
+				Parent = pill,
 			})
-			body.TextTransparency = 0.1
+			Util.corner(3)
+			Util.create("Frame", {
+				BackgroundColor3 = Theme.color(data.toggle and "bg" or "muted"),
+				Size = UDim2.fromOffset(6, 6),
+				Position = UDim2.fromOffset(data.toggle and 8 or 1, 1),
+				Parent = track,
+			})
+		else
+			Components.icon(pill, data.icon or "bell", 13, "icon", 1)
 		end
 
-		table.insert(active, card)
+		local label = Util.create("TextLabel", {
+			BackgroundTransparency = 1,
+			Text = data.title or "Notification",
+			Font = Util.Fonts.medium,
+			TextSize = 10,
+			TextColor3 = Theme.color("icon"),
+			AutomaticSize = Enum.AutomaticSize.X,
+			Size = UDim2.new(0, 0, 1, 0),
+			LayoutOrder = 2,
+			Parent = pill,
+		})
+		Theme.bind(label, "TextColor3", "icon")
+
+		local scale = Util.create("UIScale", { Scale = 0.85, Parent = pill })
+		pill.BackgroundTransparency = 1
 		task.spawn(function()
-			Util.tween(card, 0.2, { BackgroundTransparency = 0 })
-			Util.tween(stroke, 0.2, { Transparency = 0 })
-			Util.tween(accent, 0.2, { Size = UDim2.fromOffset(2, 26) })
-			task.wait(data.duration or 3.2)
-			Util.tween(card, 0.22, { BackgroundTransparency = 1 })
-			Util.tween(stroke, 0.22, { Transparency = 1 })
-			task.wait(0.25)
-			for index = #active, 1, -1 do
-				if active[index] == card then
-					table.remove(active, index)
-				end
-			end
-			card:Destroy()
+			Util.tween(pill, 0.18, { BackgroundTransparency = 0 })
+			Util.tween(scale, 0.22, { Scale = 1 })
+			task.wait(data.duration or 2.2)
+			Util.tween(pill, 0.2, { BackgroundTransparency = 1 })
+			Util.tween(stroke, 0.2, { Transparency = 1 })
+			Util.tween(label, 0.2, { TextTransparency = 1 })
+			task.wait(0.22)
+			pill:Destroy()
 		end)
 
-		return card
+		local total = 0
+		for _, child in ipairs(holder:GetChildren()) do
+			if child:IsA("Frame") then
+				total = total + 1
+			end
+		end
+		if total > 4 then
+			local oldest = nil
+			for _, child in ipairs(holder:GetChildren()) do
+				if child:IsA("Frame") and (oldest == nil or child.LayoutOrder < oldest.LayoutOrder) then
+					oldest = child
+				end
+			end
+			if oldest then
+				oldest:Destroy()
+			end
+		end
+
+		return pill
 	end
 
 	return Notify

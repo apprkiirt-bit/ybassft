@@ -203,9 +203,6 @@ return function(ctx)
 		dot(Color3.fromRGB(254, 188, 46), "min", function()
 			Window.minimize()
 		end, "Minimize")
-		dot(Color3.fromRGB(40, 200, 64), "max", function()
-			Window.maximize()
-		end, "Maximize")
 	end
 
 	local function createNav(parent)

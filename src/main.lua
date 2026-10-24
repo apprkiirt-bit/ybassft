@@ -71,7 +71,7 @@ end
 
 Notify.init(screen)
 Window.init(screen, Registry.tabs, Store)
-HUD.init(screen, Store)
+HUD.init(screen, Store, Registry)
 
 local function applyScale()
 	local scale = Store.get("files.interface.scale", 1)
@@ -110,6 +110,13 @@ applyTheme(Store.get("files.interface.theme", "Violet"), false)
 applyScale()
 applyBlur()
 
+local cardTitles = {}
+for _, tab in ipairs(Registry.tabs) do
+	for _, spec in ipairs(tab.cards) do
+		cardTitles[spec.path] = spec.title
+	end
+end
+
 Store.AnyChanged:Connect(function(path)
 	if path == "files.interface.scale" then
 		applyScale()
@@ -122,6 +129,13 @@ Store.AnyChanged:Connect(function(path)
 		end
 	elseif string.match(path, "^visuals%.hud%.") or string.match(path, "^visuals%.trackers%.") then
 		HUD.refresh()
+	end
+	HUD.onStoreChanged()
+	if string.match(path, "%.enabled$") then
+		local title = cardTitles[string.gsub(path, "%.enabled$", "")]
+		if title then
+			Notify.push({ title = title, toggle = Store.get(path) == true })
+		end
 	end
 end)
 

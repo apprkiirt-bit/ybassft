@@ -1,0 +1,1022 @@
+{
+  "src/core/config.lua": {
+    "mtime": 1792779835.202618,
+    "seen": 1792856638.655335,
+    "ast_hash": "ae1120740079dc06a40f411dfaec6fbf",
+    "semantic_hash": ""
+  },
+  "src/core/icons.lua": {
+    "mtime": 1792780144.4805176,
+    "seen": 1792856638.655335,
+    "ast_hash": "5c27dddb1c2934eef11908efb0f033ee",
+    "semantic_hash": ""
+  },
+  "src/core/signal.lua": {
+    "mtime": 1792779043.747507,
+    "seen": 1792856638.655335,
+    "ast_hash": "aa62c7b818492c4779313d46adc4c89e",
+    "semantic_hash": ""
+  },
+  "src/core/store.lua": {
+    "mtime": 1792779084.0122747,
+    "seen": 1792856638.655335,
+    "ast_hash": "dcc91d2a451051594e5ac640c477aa49",
+    "semantic_hash": ""
+  },
+  "src/core/util.lua": {
+    "mtime": 1792779043.7465305,
+    "seen": 1792856638.655335,
+    "ast_hash": "a32ab34abe18e816b267a82c22d6d056",
+    "semantic_hash": ""
+  },
+  "src/features/registry.lua": {
+    "mtime": 1792781132.8080268,
+    "seen": 1792856638.655335,
+    "ast_hash": "591df7a2728f8bc3b2deb3f8ee6636db",
+    "semantic_hash": ""
+  },
+  "src/main.lua": {
+    "mtime": 1792781142.329476,
+    "seen": 1792856638.655335,
+    "ast_hash": "ab1b5f1b79d88db340957764ab3a31bf",
+    "semantic_hash": ""
+  },
+  "src/ui/components.lua": {
+    "mtime": 1792821096.3531024,
+    "seen": 1792856638.655335,
+    "ast_hash": "37f894cd9310cfbe5457cbfb6b692b48",
+    "semantic_hash": ""
+  },
+  "src/ui/hud.lua": {
+    "mtime": 1792820870.2908633,
+    "seen": 1792856638.655335,
+    "ast_hash": "0b879610e6ec27316d1bd2f57524e6f8",
+    "semantic_hash": ""
+  },
+  "src/ui/notify.lua": {
+    "mtime": 1792820870.3064888,
+    "seen": 1792856638.655335,
+    "ast_hash": "950519e5ec89f06b482be7ffe401faad",
+    "semantic_hash": ""
+  },
+  "src/ui/theme.lua": {
+    "mtime": 1792781069.3275228,
+    "seen": 1792856638.655335,
+    "ast_hash": "2932fa95b4431c40d176a554c5cd2e64",
+    "semantic_hash": ""
+  },
+  "src/ui/window.lua": {
+    "mtime": 1792856525.332525,
+    "seen": 1792856638.655335,
+    "ast_hash": "c05b2e216afcc89a3c857dc9312d2bd2",
+    "semantic_hash": ""
+  },
+  "tools/check.js": {
+    "mtime": 1792780124.7558775,
+    "seen": 1792856638.655335,
+    "ast_hash": "918fb69504caf1d3edb8e798d1c6900a",
+    "semantic_hash": ""
+  },
+  "tools/data.js": {
+    "mtime": 1792781375.717879,
+    "seen": 1792856638.655335,
+    "ast_hash": "60731c63889a253df5036ac844c7a327",
+    "semantic_hash": ""
+  },
+  "tools/gen-data.js": {
+    "mtime": 1792781210.0006392,
+    "seen": 1792856638.655335,
+    "ast_hash": "9d945358710253a804e0274a28753aa0",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1792780321.3848765,
+    "seen": 1792856638.655335,
+    "ast_hash": "10f1f78c6a56a5a3867d444bf5862ce7",
+    "semantic_hash": ""
+  },
+  "tools/dump.txt": {
+    "mtime": 1792855582.5536225,
+    "seen": 1792856638.655335,
+    "ast_hash": "e98bf0f873bf82d79eafac0aacd00da1",
+    "semantic_hash": ""
+  },
+  "tools/preview.html": {
+    "mtime": 1792856544.5293305,
+    "seen": 1792856638.655335,
+    "ast_hash": "99427579dd0514874caa3df6dffa359c",
+    "semantic_hash": ""
+  },
+  "assets/icons/activity.png": {
+    "mtime": 1792778878.2812607,
+    "seen": 1792856638.655335,
+    "ast_hash": "4f2011431c4dcdd2ae6edc2c10aaceaa",
+    "semantic_hash": ""
+  },
+  "assets/icons/arrow-right.png": {
+    "mtime": 1792778878.2812607,
+    "seen": 1792856638.655335,
+    "ast_hash": "edc8e98dd5f3761a1a5f81407f0bf995",
+    "semantic_hash": ""
+  },
+  "assets/icons/banknote.png": {
+    "mtime": 1792778878.294624,
+    "seen": 1792856638.655335,
+    "ast_hash": "05f108b81fd16840ac80eecbe0ca3c6c",
+    "semantic_hash": ""
+  },
+  "assets/icons/bell.png": {
+    "mtime": 1792778878.294624,
+    "seen": 1792856638.655335,
+    "ast_hash": "6bb9925298432309537239fb389f6123",
+    "semantic_hash": ""
+  },
+  "assets/icons/box.png": {
+    "mtime": 1792778878.294624,
+    "seen": 1792856638.655335,
+    "ast_hash": "733d7e34ae5dcc2a07540f0b07645669",
+    "semantic_hash": ""
+  },
+  "assets/icons/check.png": {
+    "mtime": 1792778878.294624,
+    "seen": 1792856638.655335,
+    "ast_hash": "4b58ca869b17edd50a56c1f16f25c819",
+    "semantic_hash": ""
+  },
+  "assets/icons/chevron-down.png": {
+    "mtime": 1792778878.3110652,
+    "seen": 1792856638.655335,
+    "ast_hash": "91652394b8c7c392b6d906ca2a21e134",
+    "semantic_hash": ""
+  },
+  "assets/icons/chevron-up.png": {
+    "mtime": 1792778878.3110652,
+    "seen": 1792856638.655335,
+    "ast_hash": "cb1382f54d0dc80d1ac9b268ef495b47",
+    "semantic_hash": ""
+  },
+  "assets/icons/circle-dot.png": {
+    "mtime": 1792778878.3110652,
+    "seen": 1792856638.655335,
+    "ast_hash": "c3a2df34f1ff9ec9fff21ec81940510e",
+    "semantic_hash": ""
+  },
+  "assets/icons/circle-help.png": {
+    "mtime": 1792778878.3110652,
+    "seen": 1792856638.655335,
+    "ast_hash": "561f38cef370600d1d019276b5c9901f",
+    "semantic_hash": ""
+  },
+  "assets/icons/coins.png": {
+    "mtime": 1792778878.3110652,
+    "seen": 1792856638.655335,
+    "ast_hash": "f5caf908a9bd628c0925023f07c0922a",
+    "semantic_hash": ""
+  },
+  "assets/icons/corner-down-right.png": {
+    "mtime": 1792778878.327698,
+    "seen": 1792856638.655335,
+    "ast_hash": "34fb1de9f2349b98386ac5092690c830",
+    "semantic_hash": ""
+  },
+  "assets/icons/cpu.png": {
+    "mtime": 1792778878.327698,
+    "seen": 1792856638.655335,
+    "ast_hash": "de1c355c8e9d06c2fab1a4d8eeb07826",
+    "semantic_hash": ""
+  },
+  "assets/icons/crosshair.png": {
+    "mtime": 1792778878.327698,
+    "seen": 1792856638.655335,
+    "ast_hash": "d043bcc99e746da0ce8d9be44408b725",
+    "semantic_hash": ""
+  },
+  "assets/icons/diamond.png": {
+    "mtime": 1792778878.327698,
+    "seen": 1792856638.655335,
+    "ast_hash": "3a58e880e5ba610adb3d4fb549b3e293",
+    "semantic_hash": ""
+  },
+  "assets/icons/download.png": {
+    "mtime": 1792778878.327698,
+    "seen": 1792856638.655335,
+    "ast_hash": "97b2f14b469e298c8e57b6f169d611db",
+    "semantic_hash": ""
+  },
+  "assets/icons/eye.png": {
+    "mtime": 1792778878.344238,
+    "seen": 1792856638.655335,
+    "ast_hash": "c625d11e72890613b47573b8b53cbae0",
+    "semantic_hash": ""
+  },
+  "assets/icons/filter.png": {
+    "mtime": 1792778878.350749,
+    "seen": 1792856638.655335,
+    "ast_hash": "177ad1f5994b6bf30e89ae3d54423ef6",
+    "semantic_hash": ""
+  },
+  "assets/icons/flame.png": {
+    "mtime": 1792778878.350749,
+    "seen": 1792856638.655335,
+    "ast_hash": "ede65d0b6acae3699fc310c3f89bfde6",
+    "semantic_hash": ""
+  },
+  "assets/icons/folder.png": {
+    "mtime": 1792778878.350749,
+    "seen": 1792856638.655335,
+    "ast_hash": "cb64794bed3625732a96cbe4221651c9",
+    "semantic_hash": ""
+  },
+  "assets/icons/footprints.png": {
+    "mtime": 1792778878.350749,
+    "seen": 1792856638.655335,
+    "ast_hash": "837343d31b61ae7b4f11a8a5db8b5a0f",
+    "semantic_hash": ""
+  },
+  "assets/icons/gauge.png": {
+    "mtime": 1792778878.3609605,
+    "seen": 1792856638.655335,
+    "ast_hash": "edafde9b3c4ad38ccf0b7fd039c99131",
+    "semantic_hash": ""
+  },
+  "assets/icons/ghost.png": {
+    "mtime": 1792778878.3687532,
+    "seen": 1792856638.655335,
+    "ast_hash": "caf671c8467a1183d9acc014ae0449f9",
+    "semantic_hash": ""
+  },
+  "assets/icons/grid-2x2.png": {
+    "mtime": 1792778878.3702807,
+    "seen": 1792856638.655335,
+    "ast_hash": "66fbf0a0d113a77cc794e6da5021bb48",
+    "semantic_hash": ""
+  },
+  "assets/icons/hand-coins.png": {
+    "mtime": 1792778878.3743546,
+    "seen": 1792856638.655335,
+    "ast_hash": "d1a1247405a2270e49dc6f6a7bd06996",
+    "semantic_hash": ""
+  },
+  "assets/icons/heart.png": {
+    "mtime": 1792778878.3776667,
+    "seen": 1792856638.655335,
+    "ast_hash": "560c03dc6eeb603d2846dd6be7c9ab3a",
+    "semantic_hash": ""
+  },
+  "assets/icons/image.png": {
+    "mtime": 1792778878.3776667,
+    "seen": 1792856638.655335,
+    "ast_hash": "4bb7f6c27a1b06cfc813ea6c521a00aa",
+    "semantic_hash": ""
+  },
+  "assets/icons/info.png": {
+    "mtime": 1792778878.3776667,
+    "seen": 1792856638.655335,
+    "ast_hash": "a889534658ac582e3ced02f3ebf97cb6",
+    "semantic_hash": ""
+  },
+  "assets/icons/keyboard.png": {
+    "mtime": 1792778878.3776667,
+    "seen": 1792856638.655335,
+    "ast_hash": "8f44b6b4248fc4650c665293fb26aa7f",
+    "semantic_hash": ""
+  },
+  "assets/icons/languages.png": {
+    "mtime": 1792778878.3944757,
+    "seen": 1792856638.655335,
+    "ast_hash": "1b6c093c931e578e64ca77b1f27ee631",
+    "semantic_hash": ""
+  },
+  "assets/icons/layers.png": {
+    "mtime": 1792778878.3944757,
+    "seen": 1792856638.655335,
+    "ast_hash": "f1eb7fde9ccefa82491d664f58f70bfd",
+    "semantic_hash": ""
+  },
+  "assets/icons/list-filter.png": {
+    "mtime": 1792778878.3944757,
+    "seen": 1792856638.655335,
+    "ast_hash": "085d796d804b7dfe5c6c891f1ae36f3e",
+    "semantic_hash": ""
+  },
+  "assets/icons/list.png": {
+    "mtime": 1792778878.4108984,
+    "seen": 1792856638.655335,
+    "ast_hash": "fe2bafcba4209e322d279bdce851d00d",
+    "semantic_hash": ""
+  },
+  "assets/icons/lock.png": {
+    "mtime": 1792778878.4108984,
+    "seen": 1792856638.655335,
+    "ast_hash": "cdf31829d1d77a4fc8fe1407bc82b93a",
+    "semantic_hash": ""
+  },
+  "assets/icons/map-pin.png": {
+    "mtime": 1792778878.4108984,
+    "seen": 1792856638.655335,
+    "ast_hash": "a96e7e442d4764f71cae3862f3fbf717",
+    "semantic_hash": ""
+  },
+  "assets/icons/monitor.png": {
+    "mtime": 1792778878.4276247,
+    "seen": 1792856638.655335,
+    "ast_hash": "e5dda4c30887dd15166ca4b707f69667",
+    "semantic_hash": ""
+  },
+  "assets/icons/moon.png": {
+    "mtime": 1792778878.4276247,
+    "seen": 1792856638.655335,
+    "ast_hash": "dfa7f03454b656c81f0ecbd00a2a9c2f",
+    "semantic_hash": ""
+  },
+  "assets/icons/mouse-pointer-click.png": {
+    "mtime": 1792778878.4276247,
+    "seen": 1792856638.655335,
+    "ast_hash": "4f4000ea805f40aef6f83df529f41e94",
+    "semantic_hash": ""
+  },
+  "assets/icons/move.png": {
+    "mtime": 1792778878.4276247,
+    "seen": 1792856638.655335,
+    "ast_hash": "f60acb0a7b545d34576e8a95e871c9e1",
+    "semantic_hash": ""
+  },
+  "assets/icons/orbit.png": {
+    "mtime": 1792778878.4507947,
+    "seen": 1792856638.655335,
+    "ast_hash": "0a3149be5737b7cc76b2430f9e36026c",
+    "semantic_hash": ""
+  },
+  "assets/icons/package.png": {
+    "mtime": 1792778878.4507947,
+    "seen": 1792856638.655335,
+    "ast_hash": "d38b793f84876336fae919fa566bc9ae",
+    "semantic_hash": ""
+  },
+  "assets/icons/palette.png": {
+    "mtime": 1792778878.4507947,
+    "seen": 1792856638.655335,
+    "ast_hash": "81025526ae3b6e6ab92c8fb9387ea6c6",
+    "semantic_hash": ""
+  },
+  "assets/icons/pause.png": {
+    "mtime": 1792778878.4616172,
+    "seen": 1792856638.655335,
+    "ast_hash": "3c42556ef537f6ef77780ef898873d92",
+    "semantic_hash": ""
+  },
+  "assets/icons/play.png": {
+    "mtime": 1792778878.4616172,
+    "seen": 1792856638.655335,
+    "ast_hash": "1b7f8d2b78232264d24630701fe72396",
+    "semantic_hash": ""
+  },
+  "assets/icons/plus.png": {
+    "mtime": 1792778878.4616172,
+    "seen": 1792856638.655335,
+    "ast_hash": "371439a15cc1120254f1c8e9c2c29b0b",
+    "semantic_hash": ""
+  },
+  "assets/icons/power.png": {
+    "mtime": 1792778878.4776602,
+    "seen": 1792856638.655335,
+    "ast_hash": "44a77d465a1d4b7fe4c6d0b32a55ad92",
+    "semantic_hash": ""
+  },
+  "assets/icons/radio.png": {
+    "mtime": 1792778878.4776602,
+    "seen": 1792856638.655335,
+    "ast_hash": "76e298d21863b8d8857f3004b4c05632",
+    "semantic_hash": ""
+  },
+  "assets/icons/refresh-cw.png": {
+    "mtime": 1792778878.4776602,
+    "seen": 1792856638.655335,
+    "ast_hash": "f9749f07f323098144f4bd17cd9c3262",
+    "semantic_hash": ""
+  },
+  "assets/icons/rotate-ccw.png": {
+    "mtime": 1792778878.494344,
+    "seen": 1792856638.655335,
+    "ast_hash": "d0010d930c279e34cc8edc2eef656b5a",
+    "semantic_hash": ""
+  },
+  "assets/icons/save.png": {
+    "mtime": 1792778878.494344,
+    "seen": 1792856638.655335,
+    "ast_hash": "c9961980b62e40fb20cb3f2da06b7931",
+    "semantic_hash": ""
+  },
+  "assets/icons/scan.png": {
+    "mtime": 1792778878.494344,
+    "seen": 1792856638.655335,
+    "ast_hash": "8e4599f6b248db035388a1d8fda20d69",
+    "semantic_hash": ""
+  },
+  "assets/icons/search.png": {
+    "mtime": 1792778878.5109544,
+    "seen": 1792856638.655335,
+    "ast_hash": "c752331ec99425e9a3599dd9dc325ca0",
+    "semantic_hash": ""
+  },
+  "assets/icons/settings.png": {
+    "mtime": 1792778878.5109544,
+    "seen": 1792856638.655335,
+    "ast_hash": "7f468862a5dad29160caac78bcd724e3",
+    "semantic_hash": ""
+  },
+  "assets/icons/shield.png": {
+    "mtime": 1792778878.5109544,
+    "seen": 1792856638.655335,
+    "ast_hash": "260feacbe0c3bda6d8278f8555eae9f5",
+    "semantic_hash": ""
+  },
+  "assets/icons/shopping-cart.png": {
+    "mtime": 1792778878.5109544,
+    "seen": 1792856638.655335,
+    "ast_hash": "a11cf7e9755bab63af77250f91c0b989",
+    "semantic_hash": ""
+  },
+  "assets/icons/skull.png": {
+    "mtime": 1792778878.5109544,
+    "seen": 1792856638.655335,
+    "ast_hash": "60a407c72baf4c979c13249841fbcb05",
+    "semantic_hash": ""
+  },
+  "assets/icons/sliders-horizontal.png": {
+    "mtime": 1792778878.52771,
+    "seen": 1792856638.655335,
+    "ast_hash": "98ff85f8aff1086f34a0ed7f2597f4a2",
+    "semantic_hash": ""
+  },
+  "assets/icons/smartphone.png": {
+    "mtime": 1792778878.52771,
+    "seen": 1792856638.655335,
+    "ast_hash": "f13c84d61af8bbf7d3c4e76e4700098b",
+    "semantic_hash": ""
+  },
+  "assets/icons/sparkles.png": {
+    "mtime": 1792778878.538746,
+    "seen": 1792856638.655335,
+    "ast_hash": "038a91c7f7bff7dabb1b4ead116fb2fa",
+    "semantic_hash": ""
+  },
+  "assets/icons/square-stack.png": {
+    "mtime": 1792778878.5403323,
+    "seen": 1792856638.655335,
+    "ast_hash": "8b0f0bb7f02f17a27b90206bde899520",
+    "semantic_hash": ""
+  },
+  "assets/icons/star.png": {
+    "mtime": 1792778878.544426,
+    "seen": 1792856638.655335,
+    "ast_hash": "29b167882928219604adc6e94e136dd6",
+    "semantic_hash": ""
+  },
+  "assets/icons/store.png": {
+    "mtime": 1792778878.5509396,
+    "seen": 1792856638.655335,
+    "ast_hash": "c0a87691d1f9fd372b8d9ac131f81906",
+    "semantic_hash": ""
+  },
+  "assets/icons/sun.png": {
+    "mtime": 1792778878.5509396,
+    "seen": 1792856638.655335,
+    "ast_hash": "3248c2bd3071e8fd4325903cf5aacf39",
+    "semantic_hash": ""
+  },
+  "assets/icons/swords.png": {
+    "mtime": 1792778878.5509396,
+    "seen": 1792856638.655335,
+    "ast_hash": "2e6ce61da8fddbbc98b7755a960c4a92",
+    "semantic_hash": ""
+  },
+  "assets/icons/target.png": {
+    "mtime": 1792778878.560938,
+    "seen": 1792856638.655335,
+    "ast_hash": "3c68df92621274640ceebb7e8801960f",
+    "semantic_hash": ""
+  },
+  "assets/icons/terminal.png": {
+    "mtime": 1792778878.560938,
+    "seen": 1792856638.655335,
+    "ast_hash": "a0e928f7caa9c9cd6136698dff3db72f",
+    "semantic_hash": ""
+  },
+  "assets/icons/timer.png": {
+    "mtime": 1792778878.560938,
+    "seen": 1792856638.655335,
+    "ast_hash": "8d40edde977551ae31ca6eeb25c22095",
+    "semantic_hash": ""
+  },
+  "assets/icons/trash-2.png": {
+    "mtime": 1792778878.5729527,
+    "seen": 1792856638.655335,
+    "ast_hash": "66cf7d2bafbc53ec037a06841446e340",
+    "semantic_hash": ""
+  },
+  "assets/icons/upload.png": {
+    "mtime": 1792778878.5777977,
+    "seen": 1792856638.655335,
+    "ast_hash": "86b862acc7fbe234a54cf70c616b3866",
+    "semantic_hash": ""
+  },
+  "assets/icons/user.png": {
+    "mtime": 1792778878.5777977,
+    "seen": 1792856638.655335,
+    "ast_hash": "5a0948bc6231be141d7be3a6f483323e",
+    "semantic_hash": ""
+  },
+  "assets/icons/users.png": {
+    "mtime": 1792778878.5777977,
+    "seen": 1792856638.655335,
+    "ast_hash": "9009c0e9e960561c060cd33e210d5dde",
+    "semantic_hash": ""
+  },
+  "assets/icons/volume-2.png": {
+    "mtime": 1792778878.5777977,
+    "seen": 1792856638.655335,
+    "ast_hash": "5ce2ab93ca57e3dc0be80e15645bff66",
+    "semantic_hash": ""
+  },
+  "assets/icons/wifi.png": {
+    "mtime": 1792778878.5777977,
+    "seen": 1792856638.655335,
+    "ast_hash": "f157a008a7f0615b23962ea5a8e6788a",
+    "semantic_hash": ""
+  },
+  "assets/icons/wind.png": {
+    "mtime": 1792778878.5943038,
+    "seen": 1792856638.655335,
+    "ast_hash": "36cd5e4eeb12a799a62df779666fd080",
+    "semantic_hash": ""
+  },
+  "assets/icons/x.png": {
+    "mtime": 1792778878.5943038,
+    "seen": 1792856638.655335,
+    "ast_hash": "58ccd5692618be352f6d3f54f5069224",
+    "semantic_hash": ""
+  },
+  "assets/icons/zap.png": {
+    "mtime": 1792778878.61103,
+    "seen": 1792856638.655335,
+    "ast_hash": "288c667294ca8f1b74de055c5ef6beca",
+    "semantic_hash": ""
+  },
+  "assets/svg/activity.svg": {
+    "mtime": 1792778305.659701,
+    "seen": 1792856638.655335,
+    "ast_hash": "8755299bda86f3d6808ec1bd599e4b16",
+    "semantic_hash": ""
+  },
+  "assets/svg/arrow-right.svg": {
+    "mtime": 1792778318.6751199,
+    "seen": 1792856638.655335,
+    "ast_hash": "304aaa9d4e505949702f4a5f83cf3bf0",
+    "semantic_hash": ""
+  },
+  "assets/svg/banknote.svg": {
+    "mtime": 1792778317.707743,
+    "seen": 1792856638.655335,
+    "ast_hash": "a4a45e3925c05e471b452c1fefbc75c9",
+    "semantic_hash": ""
+  },
+  "assets/svg/bell.svg": {
+    "mtime": 1792778307.7849896,
+    "seen": 1792856638.655335,
+    "ast_hash": "aa1741559803412979ab15d7c7bee209",
+    "semantic_hash": ""
+  },
+  "assets/svg/box.svg": {
+    "mtime": 1792778316.9671535,
+    "seen": 1792856638.655335,
+    "ast_hash": "2069c9188e53ad7a1a76cc5fb86faf55",
+    "semantic_hash": ""
+  },
+  "assets/svg/check.svg": {
+    "mtime": 1792778307.280699,
+    "seen": 1792856638.655335,
+    "ast_hash": "48be91c255658be1cb5feefd874d4e52",
+    "semantic_hash": ""
+  },
+  "assets/svg/chevron-down.svg": {
+    "mtime": 1792778297.6663437,
+    "seen": 1792856638.655335,
+    "ast_hash": "038632b9dc5e5597c9db098f6af52415",
+    "semantic_hash": ""
+  },
+  "assets/svg/chevron-up.svg": {
+    "mtime": 1792778297.8960447,
+    "seen": 1792856638.655335,
+    "ast_hash": "b8070fe9ad08ad252631726aca189760",
+    "semantic_hash": ""
+  },
+  "assets/svg/circle-dot.svg": {
+    "mtime": 1792778319.948455,
+    "seen": 1792856638.655335,
+    "ast_hash": "7a7d9efe4a130679a1ea177e674a928a",
+    "semantic_hash": ""
+  },
+  "assets/svg/circle-help.svg": {
+    "mtime": 1792778321.219036,
+    "seen": 1792856638.655335,
+    "ast_hash": "249bd8c8f12ff7fafa9567f86e2f93b3",
+    "semantic_hash": ""
+  },
+  "assets/svg/coins.svg": {
+    "mtime": 1792778302.1762137,
+    "seen": 1792856638.655335,
+    "ast_hash": "dfa25405ecd3a0433182ceddb72a3aa4",
+    "semantic_hash": ""
+  },
+  "assets/svg/corner-down-right.svg": {
+    "mtime": 1792778319.3969395,
+    "seen": 1792856638.655335,
+    "ast_hash": "e594c37e1aa816f49be66062ce9ebd81",
+    "semantic_hash": ""
+  },
+  "assets/svg/cpu.svg": {
+    "mtime": 1792778306.251513,
+    "seen": 1792856638.655335,
+    "ast_hash": "042430be5cb5612a3613cbb85d97c3c9",
+    "semantic_hash": ""
+  },
+  "assets/svg/crosshair.svg": {
+    "mtime": 1792778299.8470392,
+    "seen": 1792856638.655335,
+    "ast_hash": "ae77eeed506f61b1cc76414fdf8afd80",
+    "semantic_hash": ""
+  },
+  "assets/svg/diamond.svg": {
+    "mtime": 1792778291.993014,
+    "seen": 1792856638.655335,
+    "ast_hash": "9d45fce2fcf8a71d3e5b3b00c9728840",
+    "semantic_hash": ""
+  },
+  "assets/svg/download.svg": {
+    "mtime": 1792778310.2678323,
+    "seen": 1792856638.655335,
+    "ast_hash": "d238dcc3a823d3de114832073cf81167",
+    "semantic_hash": ""
+  },
+  "assets/svg/eye.svg": {
+    "mtime": 1792778311.5636675,
+    "seen": 1792856638.655335,
+    "ast_hash": "a4c8fb8289f70f4f9fe594b5a066e161",
+    "semantic_hash": ""
+  },
+  "assets/svg/filter.svg": {
+    "mtime": 1792778319.6829944,
+    "seen": 1792856638.655335,
+    "ast_hash": "74a8596055d36fbdfdb57d2b98f1456e",
+    "semantic_hash": ""
+  },
+  "assets/svg/flame.svg": {
+    "mtime": 1792778312.3495066,
+    "seen": 1792856638.655335,
+    "ast_hash": "ccbed1689ee21909efe3f8a7c1ca7c45",
+    "semantic_hash": ""
+  },
+  "assets/svg/folder.svg": {
+    "mtime": 1792778294.2802668,
+    "seen": 1792856638.655335,
+    "ast_hash": "f8c1a67c8c5f3c4ede6b57980acf73f2",
+    "semantic_hash": ""
+  },
+  "assets/svg/footprints.svg": {
+    "mtime": 1792778292.6196022,
+    "seen": 1792856638.655335,
+    "ast_hash": "726595c25520250a3d2589033ded40ac",
+    "semantic_hash": ""
+  },
+  "assets/svg/gauge.svg": {
+    "mtime": 1792778308.3226197,
+    "seen": 1792856638.655335,
+    "ast_hash": "5e49719793a6f606f4c0f11075f68ed0",
+    "semantic_hash": ""
+  },
+  "assets/svg/ghost.svg": {
+    "mtime": 1792778305.1970496,
+    "seen": 1792856638.655335,
+    "ast_hash": "c2fd1822f54843a4fcbc3d7c6112df22",
+    "semantic_hash": ""
+  },
+  "assets/svg/grid-2x2.svg": {
+    "mtime": 1792778293.12941,
+    "seen": 1792856638.655335,
+    "ast_hash": "9f9ed6880c15c28d6db700a8cad62c26",
+    "semantic_hash": ""
+  },
+  "assets/svg/hand-coins.svg": {
+    "mtime": 1792778317.2708738,
+    "seen": 1792856638.655335,
+    "ast_hash": "6bcf9c908ef92699656996245ec87cf7",
+    "semantic_hash": ""
+  },
+  "assets/svg/heart.svg": {
+    "mtime": 1792778300.964339,
+    "seen": 1792856638.655335,
+    "ast_hash": "4ef25b66c4e5673414d0d7acdfaa13ac",
+    "semantic_hash": ""
+  },
+  "assets/svg/image.svg": {
+    "mtime": 1792778293.425611,
+    "seen": 1792856638.655335,
+    "ast_hash": "806906f0880ba0532aaaadbd341370e3",
+    "semantic_hash": ""
+  },
+  "assets/svg/info.svg": {
+    "mtime": 1792778321.4903429,
+    "seen": 1792856638.655335,
+    "ast_hash": "bdec9b9f44f49ab76e1e4ed1434ba2a6",
+    "semantic_hash": ""
+  },
+  "assets/svg/keyboard.svg": {
+    "mtime": 1792778298.432893,
+    "seen": 1792856638.655335,
+    "ast_hash": "5ec2018e7411a986b7e2d8c10758d082",
+    "semantic_hash": ""
+  },
+  "assets/svg/languages.svg": {
+    "mtime": 1792778295.614221,
+    "seen": 1792856638.655335,
+    "ast_hash": "4092be8019009f0cd47782cf8668a173",
+    "semantic_hash": ""
+  },
+  "assets/svg/layers.svg": {
+    "mtime": 1792778316.6927228,
+    "seen": 1792856638.655335,
+    "ast_hash": "777a0e8d1a21a40d92f5176861ca3bb1",
+    "semantic_hash": ""
+  },
+  "assets/svg/list-filter.svg": {
+    "mtime": 1792778298.3090136,
+    "seen": 1792856638.655335,
+    "ast_hash": "8f5e848a8a107e34a6bfdfa268c08875",
+    "semantic_hash": ""
+  },
+  "assets/svg/list.svg": {
+    "mtime": 1792778298.63126,
+    "seen": 1792856638.655335,
+    "ast_hash": "10fbecff171f283f313b9fc5320cdd3a",
+    "semantic_hash": ""
+  },
+  "assets/svg/lock.svg": {
+    "mtime": 1792778314.316513,
+    "seen": 1792856638.655335,
+    "ast_hash": "b8f8c2485fd7e599f52fc8c9d43cd678",
+    "semantic_hash": ""
+  },
+  "assets/svg/map-pin.svg": {
+    "mtime": 1792778311.7359343,
+    "seen": 1792856638.655335,
+    "ast_hash": "de03aafbb29ee182e29ac2111ebc01ff",
+    "semantic_hash": ""
+  },
+  "assets/svg/monitor.svg": {
+    "mtime": 1792778320.6958895,
+    "seen": 1792856638.655335,
+    "ast_hash": "e180b7ebf75d4c772f30f3c87816b20c",
+    "semantic_hash": ""
+  },
+  "assets/svg/moon.svg": {
+    "mtime": 1792778296.0088778,
+    "seen": 1792856638.655335,
+    "ast_hash": "46fa6022289345e6dab867c7a4c7de0b",
+    "semantic_hash": ""
+  },
+  "assets/svg/mouse-pointer-click.svg": {
+    "mtime": 1792778303.287903,
+    "seen": 1792856638.655335,
+    "ast_hash": "25b915c381550245febe65954cfa29ad",
+    "semantic_hash": ""
+  },
+  "assets/svg/move.svg": {
+    "mtime": 1792778303.6315749,
+    "seen": 1792856638.655335,
+    "ast_hash": "538437976aa02e3dd61dfd3a9b5b3f6d",
+    "semantic_hash": ""
+  },
+  "assets/svg/orbit.svg": {
+    "mtime": 1792778313.5351505,
+    "seen": 1792856638.655335,
+    "ast_hash": "81482aeac5ed9378391f1076e42aa056",
+    "semantic_hash": ""
+  },
+  "assets/svg/package.svg": {
+    "mtime": 1792778301.1358767,
+    "seen": 1792856638.655335,
+    "ast_hash": "bbd15310eb99b2512ba37586a3e85fb3",
+    "semantic_hash": ""
+  },
+  "assets/svg/palette.svg": {
+    "mtime": 1792778299.6348755,
+    "seen": 1792856638.655335,
+    "ast_hash": "5dabe926be0ea5ae2da3d331ef3e79c1",
+    "semantic_hash": ""
+  },
+  "assets/svg/pause.svg": {
+    "mtime": 1792778312.0972207,
+    "seen": 1792856638.655335,
+    "ast_hash": "fb5a10f7198ca25278c9122217794a2c",
+    "semantic_hash": ""
+  },
+  "assets/svg/play.svg": {
+    "mtime": 1792778311.9784288,
+    "seen": 1792856638.655335,
+    "ast_hash": "64e888a43f386ef7da47ee7f426ca3fe",
+    "semantic_hash": ""
+  },
+  "assets/svg/plus.svg": {
+    "mtime": 1792778307.01476,
+    "seen": 1792856638.655335,
+    "ast_hash": "c0bb2dc776835d78a40272b8033b2822",
+    "semantic_hash": ""
+  },
+  "assets/svg/power.svg": {
+    "mtime": 1792778315.4892862,
+    "seen": 1792856638.655335,
+    "ast_hash": "ada9c7c16db163ebbbe35a547734ed6d",
+    "semantic_hash": ""
+  },
+  "assets/svg/radio.svg": {
+    "mtime": 1792778313.9803758,
+    "seen": 1792856638.655335,
+    "ast_hash": "d00a7f97783a7f57c89c8d92203973cf",
+    "semantic_hash": ""
+  },
+  "assets/svg/refresh-cw.svg": {
+    "mtime": 1792778309.700952,
+    "seen": 1792856638.655335,
+    "ast_hash": "491304130596d64292b26cf3b403bc50",
+    "semantic_hash": ""
+  },
+  "assets/svg/rotate-ccw.svg": {
+    "mtime": 1792778316.2674222,
+    "seen": 1792856638.655335,
+    "ast_hash": "6553c904eb8ce2396b747e1e7b0bb89d",
+    "semantic_hash": ""
+  },
+  "assets/svg/save.svg": {
+    "mtime": 1792778310.0433362,
+    "seen": 1792856638.655335,
+    "ast_hash": "6b71800f1933d61743a10b971f16bfe7",
+    "semantic_hash": ""
+  },
+  "assets/svg/scan.svg": {
+    "mtime": 1792778316.564325,
+    "seen": 1792856638.655335,
+    "ast_hash": "096d4e9a914a17054c500902783325f7",
+    "semantic_hash": ""
+  },
+  "assets/svg/search.svg": {
+    "mtime": 1792778295.241436,
+    "seen": 1792856638.655335,
+    "ast_hash": "b346378744e686b8043df58f8f15f830",
+    "semantic_hash": ""
+  },
+  "assets/svg/settings.svg": {
+    "mtime": 1792778307.5642953,
+    "seen": 1792856638.655335,
+    "ast_hash": "95727decdb5d690491a8280e1ea3d733",
+    "semantic_hash": ""
+  },
+  "assets/svg/shield.svg": {
+    "mtime": 1792778293.897084,
+    "seen": 1792856638.655335,
+    "ast_hash": "4cd870d0164162c3ccd7ddff104e000c",
+    "semantic_hash": ""
+  },
+  "assets/svg/shopping-cart.svg": {
+    "mtime": 1792778302.463758,
+    "seen": 1792856638.655335,
+    "ast_hash": "39d29f934694da8159f535e247d4b79f",
+    "semantic_hash": ""
+  },
+  "assets/svg/skull.svg": {
+    "mtime": 1792778309.3476012,
+    "seen": 1792856638.655335,
+    "ast_hash": "e164da0405d48dce28494d543450e2b1",
+    "semantic_hash": ""
+  },
+  "assets/svg/sliders-horizontal.svg": {
+    "mtime": 1792778314.6887777,
+    "seen": 1792856638.655335,
+    "ast_hash": "542a017c584ceec3ef79e5c86b94ffbe",
+    "semantic_hash": ""
+  },
+  "assets/svg/smartphone.svg": {
+    "mtime": 1792778320.9496956,
+    "seen": 1792856638.655335,
+    "ast_hash": "6d0dc57738c48aa07bfad30577d6ed06",
+    "semantic_hash": ""
+  },
+  "assets/svg/sparkles.svg": {
+    "mtime": 1792778294.7637496,
+    "seen": 1792856638.655335,
+    "ast_hash": "3e981f91903459962c27988997bf05b9",
+    "semantic_hash": ""
+  },
+  "assets/svg/square-stack.svg": {
+    "mtime": 1792778320.440277,
+    "seen": 1792856638.655335,
+    "ast_hash": "3078dcba5fa1dbad902bcb95242e41ed",
+    "semantic_hash": ""
+  },
+  "assets/svg/star.svg": {
+    "mtime": 1792778299.1637409,
+    "seen": 1792856638.655335,
+    "ast_hash": "b47be9aa6c732db686cda4660d30aea0",
+    "semantic_hash": ""
+  },
+  "assets/svg/store.svg": {
+    "mtime": 1792778318.1830823,
+    "seen": 1792856638.655335,
+    "ast_hash": "dcece03229d5f283ae0f5bc3c9336b0f",
+    "semantic_hash": ""
+  },
+  "assets/svg/sun.svg": {
+    "mtime": 1792778296.6930635,
+    "seen": 1792856638.655335,
+    "ast_hash": "b330194f6b1e040568aa6025636ec0ce",
+    "semantic_hash": ""
+  },
+  "assets/svg/swords.svg": {
+    "mtime": 1792778292.214929,
+    "seen": 1792856638.655335,
+    "ast_hash": "fdd1cf519a445ca3533b622bc441d8e3",
+    "semantic_hash": ""
+  },
+  "assets/svg/target.svg": {
+    "mtime": 1792778308.1703033,
+    "seen": 1792856638.655335,
+    "ast_hash": "a0eca54dc21ba385afc6588d56ee941b",
+    "semantic_hash": ""
+  },
+  "assets/svg/terminal.svg": {
+    "mtime": 1792778306.0430236,
+    "seen": 1792856638.655335,
+    "ast_hash": "e7faf679d5ed0e37f3179b2feeeb0421",
+    "semantic_hash": ""
+  },
+  "assets/svg/timer.svg": {
+    "mtime": 1792778302.8803604,
+    "seen": 1792856638.655335,
+    "ast_hash": "7b306b7e3881634cc1bc3f1eaaa28f9a",
+    "semantic_hash": ""
+  },
+  "assets/svg/trash-2.svg": {
+    "mtime": 1792778306.6466095,
+    "seen": 1792856638.655335,
+    "ast_hash": "9e26eea3b8cae0bca41eda9e42cbeb0b",
+    "semantic_hash": ""
+  },
+  "assets/svg/upload.svg": {
+    "mtime": 1792778311.0151422,
+    "seen": 1792856638.655335,
+    "ast_hash": "f434607199d6045145f153cc84320bc3",
+    "semantic_hash": ""
+  },
+  "assets/svg/user.svg": {
+    "mtime": 1792778296.9410174,
+    "seen": 1792856638.655335,
+    "ast_hash": "931120b46b694170e7bb2f792a6f7972",
+    "semantic_hash": ""
+  },
+  "assets/svg/users.svg": {
+    "mtime": 1792778297.1430113,
+    "seen": 1792856638.655335,
+    "ast_hash": "da43f24675fb331390041cbd72b717bf",
+    "semantic_hash": ""
+  },
+  "assets/svg/volume-2.svg": {
+    "mtime": 1792778298.901647,
+    "seen": 1792856638.655335,
+    "ast_hash": "62a8babed01f49095230946aac05a117",
+    "semantic_hash": ""
+  },
+  "assets/svg/wifi.svg": {
+    "mtime": 1792778306.4303823,
+    "seen": 1792856638.655335,
+    "ast_hash": "265e0ec20677334f347e8df31a8d56a2",
+    "semantic_hash": ""
+  },
+  "assets/svg/wind.svg": {
+    "mtime": 1792778303.8568003,
+    "seen": 1792856638.655335,
+    "ast_hash": "a7f6b016ee1f12532f567558184e1227",
+    "semantic_hash": ""
+  },
+  "assets/svg/x.svg": {
+    "mtime": 1792778311.2254093,
+    "seen": 1792856638.655335,
+    "ast_hash": "220b2daf6d767f598cb509ef172f347a",
+    "semantic_hash": ""
+  },
+  "assets/svg/zap.svg": {
+    "mtime": 1792778300.565537,
+    "seen": 1792856638.655335,
+    "ast_hash": "daaa45405b5670badc8f419d8fd11ebd",
+    "semantic_hash": ""
+  }
+}
