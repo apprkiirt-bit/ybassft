@@ -240,7 +240,7 @@ return function(ctx)
 				Parent = navFrame,
 			})
 			Util.corner(8)
-			local icon = Components.icon(button, tab.icon or "box", 14, "icon")
+			local icon = Components.icon(button, tab.icon or "box", 18, "icon")
 			icon.AnchorPoint = Vector2.new(0.5, 0.5)
 			icon.Position = UDim2.fromScale(0.5, 0.5)
 			local underline = Util.create("Frame", {
@@ -293,7 +293,7 @@ return function(ctx)
 				Parent = toolsFrame,
 			})
 			Util.corner(7)
-			local image = Components.icon(button, icon, 14, "icon")
+			local image = Components.icon(button, icon, 18, "icon")
 			image.AnchorPoint = Vector2.new(0.5, 0.5)
 			image.Position = UDim2.fromScale(0.5, 0.5)
 			button.Name = tooltip
@@ -428,7 +428,7 @@ return function(ctx)
 		})
 		Util.corner(7)
 		Util.stroke(Theme.color("border"), 1, 0.1).Parent = searchFrame
-		local icon = Components.icon(searchFrame, "search", 13, "icon")
+		local icon = Components.icon(searchFrame, "search", 15, "icon")
 		icon.Position = UDim2.fromOffset(7, 6)
 		searchBox = Util.create("TextBox", {
 			Text = "",

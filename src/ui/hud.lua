@@ -42,20 +42,20 @@ return function(ctx)
 			Parent = anchorLine,
 		})
 		local layout = Util.hlist({ Padding = UDim.new(0, 5), Parent = frame })
-		local icon = Components.icon(frame, iconName, 12, "icon", 1)
+		local icon = Components.icon(frame, iconName, 15, "icon", 1)
 		local label = Util.create("TextLabel", {
 			BackgroundTransparency = 1,
 			Text = initial or "",
 			Font = Util.Fonts.medium,
-			TextSize = 10,
+			TextSize = 11,
 			TextXAlignment = Enum.TextXAlignment.Left,
-			TextColor3 = Theme.color("muted"),
+			TextColor3 = Theme.color("icon"),
 			AutomaticSize = Enum.AutomaticSize.X,
 			Size = UDim2.new(0, 0, 1, 0),
 			LayoutOrder = 2,
 			Parent = frame,
 		})
-		Theme.bind(label, "TextColor3", "muted")
+		Theme.bind(label, "TextColor3", "icon")
 		local divider = Util.create("Frame", {
 			BackgroundColor3 = Theme.color("border"),
 			Size = UDim2.fromOffset(1, 12),
@@ -167,7 +167,7 @@ return function(ctx)
 			Parent = anchorLine,
 		})
 		Util.hlist({ Padding = UDim.new(0, 6), Parent = nameChip })
-		Components.icon(nameChip, "diamond", 14, "accent", 1)
+		Components.icon(nameChip, "diamond", 16, "accent", 1)
 		local nameText = Util.create("TextLabel", {
 			BackgroundTransparency = 1,
 			Text = game:GetService("Players").LocalPlayer.Name,
